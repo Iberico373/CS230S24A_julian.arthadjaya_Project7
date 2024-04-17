@@ -173,53 +173,51 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Animation.c" />
-    <ClCompile Include="Source\AsteroidsScene.c" />
-    <ClCompile Include="Source\Behavior.c" />
-    <ClCompile Include="Source\BehaviorAsteroid.c" />
-    <ClCompile Include="Source\BehaviorBullet.c" />
-    <ClCompile Include="Source\BehaviorHudText.c" />
-    <ClCompile Include="Source\BehaviorSpaceship.c" />
-    <ClCompile Include="Source\CheatSystem.c" />
-    <ClCompile Include="Source\Collider.c" />
-    <ClCompile Include="Source\ColliderCircle.c" />
-    <ClCompile Include="Source\ColliderLine.c" />
-    <ClCompile Include="Source\Engine.c" />
-    <ClCompile Include="Source\Entity.c" />
-    <ClCompile Include="Source\EntityContainer.c" />
-    <ClCompile Include="Source\EntityFactory.c" />
-    <ClCompile Include="Source\Main.c" />
-    <ClCompile Include="Source\Matrix2D.c" />
-    <ClCompile Include="Source\Mesh.c" />
-    <ClCompile Include="Source\MeshLibrary.c" />
-    <ClCompile Include="Source\OmegaScene.c" />
-    <ClCompile Include="Source\Physics.c" />
-    <ClCompile Include="Source\PlatformSystem.c" />
-    <ClCompile Include="Source\Random.c" />
-    <ClCompile Include="Source\SandboxScene.c" />
-    <ClCompile Include="Source\Scene.c" />
-    <ClCompile Include="Source\DemoScene.c" />
-    <ClCompile Include="Source\Level1Scene.c" />
-    <ClCompile Include="Source\Level2Scene.c" />
-    <ClCompile Include="Source\SceneSystem.c" />
-    <ClCompile Include="Source\ScoreSystem.c" />
-    <ClCompile Include="Source\Sprite.c" />
-    <ClCompile Include="Source\SpriteSource.c" />
-    <ClCompile Include="Source\SpriteSourceLibrary.c" />
-    <ClCompile Include="Source\stdafx.c">
+    <ClCompile Include="Source\Animation.cpp" />
+    <ClCompile Include="Source\AsteroidsScene.cpp" />
+    <ClCompile Include="Source\Behavior.cpp" />
+    <ClCompile Include="Source\BehaviorAsteroid.cpp" />
+    <ClCompile Include="Source\BehaviorBullet.cpp" />
+    <ClCompile Include="Source\BehaviorHudText.cpp" />
+    <ClCompile Include="Source\BehaviorSpaceship.cpp" />
+    <ClCompile Include="Source\CheatSystem.cpp" />
+    <ClCompile Include="Source\Collider.cpp" />
+    <ClCompile Include="Source\ColliderCircle.cpp" />
+    <ClCompile Include="Source\ColliderLine.cpp" />
+    <ClCompile Include="Source\Engine.cpp" />
+    <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\EntityContainer.cpp" />
+    <ClCompile Include="Source\EntityFactory.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Matrix2D.cpp" />
+    <ClCompile Include="Source\Mesh.cpp" />
+    <ClCompile Include="Source\MeshLibrary.cpp" />
+    <ClCompile Include="Source\OmegaScene.cpp" />
+    <ClCompile Include="Source\Physics.cpp" />
+    <ClCompile Include="Source\PlatformSystem.cpp" />
+    <ClCompile Include="Source\Random.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
+    <ClCompile Include="Source\Level1Scene.cpp" />
+    <ClCompile Include="Source\Level2Scene.cpp" />
+    <ClCompile Include="Source\SceneSystem.cpp" />
+    <ClCompile Include="Source\ScoreSystem.cpp" />
+    <ClCompile Include="Source\Sprite.cpp" />
+    <ClCompile Include="Source\SpriteSource.cpp" />
+    <ClCompile Include="Source\SpriteSourceLibrary.cpp" />
+    <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Source\Stream.c" />
-    <ClCompile Include="Source\Stub.c" />
-    <ClCompile Include="Source\StubScene.c" />
-    <ClCompile Include="Source\StubSystem.c" />
-    <ClCompile Include="Source\Teleporter.c" />
-    <ClCompile Include="Source\Trace.c" />
-    <ClCompile Include="Source\Transform.c" />
-    <ClCompile Include="Source\Vector2D.c" />
+    <ClCompile Include="Source\Stream.cpp" />
+    <ClCompile Include="Source\Stub.cpp" />
+    <ClCompile Include="Source\StubScene.cpp" />
+    <ClCompile Include="Source\StubSystem.cpp" />
+    <ClCompile Include="Source\Teleporter.cpp" />
+    <ClCompile Include="Source\Trace.cpp" />
+    <ClCompile Include="Source\Transform.cpp" />
+    <ClCompile Include="Source\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
@@ -244,9 +242,7 @@
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\PlatformSystem.h" />
     <ClInclude Include="Source\Random.h" />
-    <ClInclude Include="Source\SandboxScene.h" />
     <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\DemoScene.h" />
     <ClInclude Include="Source\Level1Scene.h" />
     <ClInclude Include="Source\Level2Scene.h" />
     <ClInclude Include="Source\SceneSystem.h" />
