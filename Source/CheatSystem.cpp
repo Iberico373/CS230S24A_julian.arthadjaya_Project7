@@ -19,8 +19,8 @@
 #include "Level2Scene.h"
 #include "AsteroidsScene.h"
 #include "OmegaScene.h"
-#include "DemoScene.h"
-#include "SandboxScene.h"
+
+
 #include "DGL.h"
 
 //------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ static CheatSystem instance =
 	{ "CheatSystem", CheatSystemInit, CheatSystemUpdate, CheatSystemRender, CheatSystemExit},
 };
 
-static const CheatSystemKeyBinding keyBindings[] = { {'1', Level1SceneGetInstance}, {'2', Level2SceneGetInstance}, {'3', AsteroidsSceneGetInstance}, {'4', OmegaSceneGetInstance}, {'9', SandboxSceneGetInstance}, {'0', DemoSceneGetInstance}};
+static const CheatSystemKeyBinding keyBindings[] = { {'1', Level1SceneGetInstance}, {'2', Level2SceneGetInstance}, {'3', AsteroidsSceneGetInstance}, {'4', OmegaSceneGetInstance}};
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -103,7 +103,7 @@ static void CheatSystemUpdate(float dt)
 	// Tell the compiler that the 'dt' variable is unused.
 	UNREFERENCED_PARAMETER(dt);
 
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		if (DGL_Input_KeyTriggered(keyBindings[i].key))
 		{

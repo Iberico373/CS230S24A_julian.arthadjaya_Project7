@@ -15,8 +15,6 @@
 #include "SceneSystem.h"
 #include "Level1Scene.h"
 #include "Level2Scene.h"
-#include "SandboxScene.h"
-#include "DemoScene.h"
 #include "Stream.h"
 #include "Mesh.h"
 #include "Sprite.h"
