@@ -1,0 +1,20 @@
+Entity
+Asteroid
+Transform
+0 0
+0
+40 40
+Physics
+0 0
+0 0
+Sprite
+0
+1
+MeshAsteroid
+None
+BehaviorAsteroid
+-1
+0
+0.0
+ColliderCircle
+20.0

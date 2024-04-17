@@ -1,0 +1,20 @@
+Entity
+Bullet
+Transform
+0 0
+0
+10 10
+Physics
+0 0
+0 0
+Sprite
+0
+1
+MeshBullet
+None
+BehaviorBullet
+-1
+0
+3.0
+ColliderCircle
+5.0

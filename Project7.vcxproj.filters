@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{bf940092-8822-47de-b285-e425e668e2aa}</UniqueIdentifier>
+      <Extensions>.c;.cpp</Extensions>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{507264d8-e713-48b2-b74f-5339f6eac237}</UniqueIdentifier>
+      <Extensions>.c;.cpp</Extensions>
+    </Filter>
+    <Filter Include="Engine\Framework">
+      <UniqueIdentifier>{75d7c494-0021-4bcf-a044-510f49057494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems">
+      <UniqueIdentifier>{7ada4fdf-0917-4e35-b199-293f5c01be20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{b21aeb27-8bbc-4b9f-8158-4fd317c8475d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Platform">
+      <UniqueIdentifier>{7c3cd12a-fbd3-4ac2-9297-ede3b752738b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems\Scene">
+      <UniqueIdentifier>{e0d6e42a-fd0a-45b3-9de0-c9fbd0000804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities">
+      <UniqueIdentifier>{dade5477-4a1d-4d33-9828-ebbbb305ac9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities\Components">
+      <UniqueIdentifier>{a76e4157-524c-43f4-b3e1-0f11e95068d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities\Components\Transform">
+      <UniqueIdentifier>{6f727ba4-d023-4caf-b871-8c2f332d60f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities\Components\Graphics">
+      <UniqueIdentifier>{0da7190c-243d-4c02-96f4-8dde8393f001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities\Components\Physics">
+      <UniqueIdentifier>{6e2eed11-ee6f-4196-bf98-c00c7335610f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities\Components\Behavior">
+      <UniqueIdentifier>{7ccddf5d-ed22-43b0-bde1-bc0328471b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Behaviors">
+      <UniqueIdentifier>{d0dac776-fdb6-4140-9c64-126958b038d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entities\Components\Collider">
+      <UniqueIdentifier>{7fe264e1-e195-4feb-8007-2362c5ff00f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Systems">
+      <UniqueIdentifier>{fd57ebb7-e7fe-4782-807b-2ec763a46884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Systems\Cheat">
+      <UniqueIdentifier>{07573600-643e-462e-9be8-76538ef29ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Systems\Score System">
+      <UniqueIdentifier>{56a3d706-ad16-41c7-85ef-6089d56017e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Stub.c">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\stdafx.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Trace.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StubSystem.c">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DemoScene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlatformSystem.c">
+      <Filter>Engine\Systems\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneSystem.c">
+      <Filter>Engine\Systems\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.c">
+      <Filter>Engine\Systems\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StubScene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level1Scene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level2Scene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Stream.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vector2D.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SandboxScene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.c">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transform.c">
+      <Filter>Engine\Entities\Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics.c">
+      <Filter>Engine\Entities\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sprite.c">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteSource.c">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.c">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityFactory.c">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Matrix2D.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation.c">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorBullet.c">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorSpaceship.c">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Behavior.c">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityContainer.c">
+      <Filter>Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsteroidsScene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshLibrary.c">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorAsteroid.c">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorHudText.c">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Teleporter.c">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collider.c">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Random.c">
+      <Filter>Engine\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteSourceLibrary.c">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderCircle.c">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderLine.c">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OmegaScene.c">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CheatSystem.c">
+      <Filter>Game\Systems\Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScoreSystem.c">
+      <Filter>Game\Systems\Score System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Stub.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stdafx.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\targetver.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BaseSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Trace.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StubSystem.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DemoScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlatformSystem.h">
+      <Filter>Engine\Systems\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneSystem.h">
+      <Filter>Engine\Systems\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Engine\Systems\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StubScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level1Scene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level2Scene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Stream.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SandboxScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transform.h">
+      <Filter>Engine\Entities\Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics.h">
+      <Filter>Engine\Entities\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sprite.h">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteSource.h">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityFactory.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Matrix2D.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorBullet.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorSpaceship.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Behavior.h">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityContainer.h">
+      <Filter>Engine\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsteroidsScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshLibrary.h">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorAsteroid.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorHudText.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Teleporter.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collider.h">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Random.h">
+      <Filter>Engine\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteSourceLibrary.h">
+      <Filter>Engine\Entities\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderCircle.h">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderLine.h">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OmegaScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CheatSystem.h">
+      <Filter>Game\Systems\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScoreSystem.h">
+      <Filter>Game\Systems\Score System</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

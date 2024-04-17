@@ -1,2 +1,2 @@
-# CS230S24A_julian.arthadjaya_Project7
- C++ refactor of project 6
+# CS230S24A_julian.arthadjaya_Project6
+ CS230 Project 6

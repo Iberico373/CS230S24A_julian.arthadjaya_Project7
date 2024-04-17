@@ -1,0 +1,50 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project6.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  stdafx.c
+  Animation.c
+  AsteroidsScene.c
+  Behavior.c
+  BehaviorAsteroid.c
+  BehaviorBullet.c
+  BehaviorHudText.c
+  BehaviorSpaceship.c
+  CheatSystem.c
+  Collider.c
+  ColliderCircle.c
+  ColliderLine.c
+  Engine.c
+  Entity.c
+  EntityContainer.c
+  EntityFactory.c
+  Main.c
+  Matrix2D.c
+  Mesh.c
+  MeshLibrary.c
+  OmegaScene.c
+  Generating Code...
+  Compiling...
+  Physics.c
+  PlatformSystem.c
+  Random.c
+  SandboxScene.c
+  Scene.c
+  DemoScene.c
+  Level1Scene.c
+  Level2Scene.c
+  SceneSystem.c
+  ScoreSystem.c
+  Sprite.c
+  SpriteSource.c
+  SpriteSourceLibrary.c
+  Stream.c
+  Stub.c
+  StubScene.c
+  StubSystem.c
+  Teleporter.c
+  Trace.c
+  Transform.c
+  Generating Code...
+  Compiling...
+  Vector2D.c
+  Generating Code...
+  Project7.vcxproj -> C:\Users\julia\Documents\DigiPen\Spring 2024\CS-230\Project Files\CS230S24A_julian.arthadjaya_Project7\x64\Debug\Project7.exe
+  1 File(s) copied

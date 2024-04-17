@@ -1,0 +1,17 @@
+Entity
+AsteroidsHighScore
+Transform
+-425 320
+0
+20 30
+Sprite
+0
+1
+Mesh16x8
+SpriteSourceFontSheet
+BehaviorHudText
+-1
+0
+0.0
+High Score: %d
+1

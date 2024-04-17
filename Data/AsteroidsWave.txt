@@ -1,0 +1,17 @@
+Entity
+AsteroidsWave
+Transform
+250 320
+0
+20 30
+Sprite
+0
+1
+Mesh16x8
+SpriteSourceFontSheet
+BehaviorHudText
+-1
+0
+0.0
+Wave: %d
+2

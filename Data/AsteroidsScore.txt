@@ -1,0 +1,17 @@
+Entity
+AsteroidsScore
+Transform
+-325 280
+0
+20 30
+Sprite
+0
+1
+Mesh16x8
+SpriteSourceFontSheet
+BehaviorHudText
+-1
+0
+0.0
+Score: %d
+0

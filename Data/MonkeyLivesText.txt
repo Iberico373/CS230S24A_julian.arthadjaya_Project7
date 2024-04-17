@@ -1,0 +1,11 @@
+Entity
+MonkeyLivesText
+Transform
+-450 300
+0
+50 50
+Sprite
+0
+1
+None
+None
