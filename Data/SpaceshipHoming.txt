@@ -10,5 +10,5 @@ Physics
 Sprite
 0
 1
-None
+MeshSpaceship
 None

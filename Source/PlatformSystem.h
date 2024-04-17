@@ -19,10 +19,6 @@
 
 //------------------------------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {	// Assume C declarations for C++.
-#endif
-
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -57,8 +53,3 @@ struct BaseSystem;
 BaseSystem* PlatformSystemGetInstance(HINSTANCE hInstance, int show);
 
 /*----------------------------------------------------------------------------*/
-
-#ifdef __cplusplus
-}                       // End of extern "C" {
-#endif
-

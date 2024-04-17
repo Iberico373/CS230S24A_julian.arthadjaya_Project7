@@ -86,7 +86,7 @@ static void BehaviorHudTextUpdateText(BehaviorHudText* behavior);
 // (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
 Behavior* BehaviorHudTextCreate(void)
 {
-	BehaviorHudText* behavior = calloc(1, sizeof(BehaviorHudText));
+	BehaviorHudText* behavior = (BehaviorHudText*)calloc(1, sizeof(BehaviorHudText));
 
 	if (behavior)
 	{
@@ -117,7 +117,7 @@ void BehaviorHudTextRead(Behavior* behavior, Stream stream)
 
 	BehaviorRead(&hudText->base, stream);
 	strcpy_s(hudText->formatString, _countof(hudText->formatString), StreamReadToken(stream));
-	hudText->scoreSystemId = StreamReadInt(stream);
+	hudText->scoreSystemId = (ScoreSystemId)StreamReadInt(stream);
 }
 
 //------------------------------------------------------------------------------

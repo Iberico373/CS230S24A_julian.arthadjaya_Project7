@@ -96,21 +96,18 @@ void Vector2DScale(Vector2D* pResult, const Vector2D* pVec0, float scale)
 // In this function, pResult will be the vector pVec0 scaled by 'scale' and added to pVec1
 void Vector2DScaleAdd(Vector2D* pResult, const Vector2D* pVec0, const Vector2D* pVec1, float scale)
 {
-	Vector2D* scaledVector = &(Vector2D){ 0, 0 };
-	Vector2DZero(scaledVector);
-
-	Vector2DScale(scaledVector, pVec0, scale);
-	Vector2DAdd(pResult, scaledVector, pVec1);
+	Vector2D scaledVector = { 0.0f, 0.0f };
+	Vector2DScale(&scaledVector, pVec0, scale);
+	Vector2DAdd(pResult, &scaledVector, pVec1);
 }
 
 // In this function, pResult will be the vector pVec0 scaled by 'scale' and pVec1 will be subtracted from it
 void Vector2DScaleSub(Vector2D* pResult, const Vector2D* pVec0, const Vector2D* pVec1, float scale)
 {
-	Vector2D* scaledVector = &(Vector2D){ 0, 0 };
-	Vector2DZero(scaledVector);
+	Vector2D scaledVector = { 0.0f, 0.0f };
 
-	Vector2DScale(scaledVector, pVec0, scale);
-	Vector2DSub(pResult, scaledVector, pVec1);
+	Vector2DScale(&scaledVector, pVec0, scale);
+	Vector2DSub(pResult, &scaledVector, pVec1);
 }
 
 // This function returns the length of the vector pVec0
@@ -130,24 +127,21 @@ float Vector2DSquareLength(const Vector2D* pVec0)
 // This function returns the distance between two points.
 float Vector2DDistance(const Vector2D* pVec0, const Vector2D* pVec1)
 {
-	Vector2D* subtractedVec = &(Vector2D){ 0, 0 };
-	Vector2DZero(subtractedVec);
-
-	Vector2DSub(subtractedVec, pVec0, pVec1);
+	Vector2D subtractedVec = { 0.0f, 0.0f };
+	Vector2DSub(&subtractedVec, pVec0, pVec1);
 	
-	return Vector2DLength(subtractedVec);
+	return Vector2DLength(&subtractedVec);
 }
 
 // This function returns the distance squared between two points.
 // NOTE: The square root function must NOT be called by this function.
 float Vector2DSquareDistance(const Vector2D* pVec0, const Vector2D* pVec1)
 {
-	Vector2D* subtractedVec = &(Vector2D){ 0, 0 };
-	Vector2DZero(subtractedVec);
+	Vector2D subtractedVec = { 0.0f, 0.0f };
 
-	Vector2DSub(subtractedVec, pVec0, pVec1);
+	Vector2DSub(&subtractedVec, pVec0, pVec1);
 
-	return Vector2DSquareLength(subtractedVec);
+	return Vector2DSquareLength(&subtractedVec);
 }
 
 // This function returns the dot product between pVec0 and pVec1

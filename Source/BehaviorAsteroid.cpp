@@ -86,7 +86,7 @@ static void BehaviorAsteroidCollisionHandler(Entity* entity1, const Entity* enti
 // (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
 Behavior* BehaviorAsteroidCreate(void)
 {
-	BehaviorAsteroid* behavior = calloc(1, sizeof(BehaviorAsteroid));
+	BehaviorAsteroid* behavior = (BehaviorAsteroid*)calloc(1, sizeof(BehaviorAsteroid));
 
 	if (behavior)
 	{
@@ -113,13 +113,13 @@ static void BehaviorAsteroidInit(Behavior* behavior)
 
 	if (asteroid->base.stateCurr == cAsteroidIdle)
 	{
-		asteroid->origin = RandomRange(0, 3);
+		asteroid->origin = (AsteroidOrigin)RandomRange(0, 3);
 		BehaviorAsteroidSetPosition(asteroid);
 		BehaviorAsteroidSetVelocity(asteroid);
 
 		Collider* collider = EntityGetCollider(behavior->parent);
 		if (collider)
-			ColliderSetCollisionHandler(collider, &BehaviorAsteroidCollisionHandler);
+			ColliderSetCollisionHandler(collider, (CollisionEventHandler) & BehaviorAsteroidCollisionHandler);
 	}
 }
 
@@ -201,7 +201,7 @@ static void BehaviorAsteroidSetVelocity(BehaviorAsteroid* asteroid)
 		break;
 	}
 
-	Vector2D velocity;
+	Vector2D velocity = { 0.0f, 0.0f };
 	Vector2DFromAngleDeg(&velocity, (float)angle);
 	float speed = RandomRangeFloat(asteroidSpeedMin, asteroidSpeedMax);
 	Vector2DScale(&velocity, &velocity, speed);

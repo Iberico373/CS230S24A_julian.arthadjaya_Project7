@@ -47,7 +47,7 @@ static const unsigned cOmegapawnMaximum = 20;
 // Private Variables:
 //------------------------------------------------------------------------------
 
-const DGL_Color* arenaColor = &(DGL_Color){ 1.0f, 1.0f, 0.0f, 1.0f };
+const DGL_Color arenaColor = { 1.0f, 1.0f, 0.0f, 1.0f };
 
 //------------------------------------------------------------------------------
 // Private Function Declarations:
@@ -98,7 +98,8 @@ static void OmegaSceneLoad(void)
 static void OmegaSceneInit()
 {
 	// Set background color
-	DGL_Graphics_SetBackgroundColor(&((const DGL_Color) { 0.0f, 0.0f, 0.0f, 0.0f }));
+	DGL_Color bgColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+	DGL_Graphics_SetBackgroundColor(&bgColor);
 
 	// Set blend mode
 	DGL_Graphics_SetBlendMode(DGL_BM_BLEND);

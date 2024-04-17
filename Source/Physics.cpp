@@ -70,7 +70,7 @@ typedef struct Physics
 //	   else return NULL.
 Physics* PhysicsCreate(void)
 {
-	Physics* physics = calloc(1, sizeof(Physics));
+	Physics* physics = (Physics*)calloc(1, sizeof(Physics));
 
 	if (physics)
 	{

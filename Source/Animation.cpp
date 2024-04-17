@@ -77,7 +77,7 @@ static void AnimationAdvanceFrame(Animation* animation);
 // (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
 Animation* AnimationCreate(void)
 {
-	Animation* anim = calloc(1, sizeof(Animation));
+	Animation* anim = (Animation*)calloc(1, sizeof(Animation));
 
 	if (anim)
 		return anim;

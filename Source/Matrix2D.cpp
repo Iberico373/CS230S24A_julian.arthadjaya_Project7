@@ -64,7 +64,7 @@ void Matrix2DIdentity(Matrix2D* pResult)
 // (NOTE: Care must be taken when pResult = pMtx.)
 void Matrix2DTranspose(Matrix2D* pResult, const Matrix2D* pMtx)
 {
-	Matrix2D temp = ((Matrix2D) { 0 });
+	Matrix2D temp = { 0.0f };
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -82,7 +82,7 @@ void Matrix2DTranspose(Matrix2D* pResult, const Matrix2D* pMtx)
 // (NOTE: Care must be taken when pResult = either pMtx0 or pMtx1.)
 void Matrix2DConcat(Matrix2D* pResult, const Matrix2D* pMtx0, const Matrix2D* pMtx1)
 {
-	Matrix2D temp = ((Matrix2D) { 0 });
+	Matrix2D temp = { 0.0f };
 
 	for (int row = 0; row < 4; ++row)
 	{
@@ -148,7 +148,7 @@ void Matrix2DRotRad(Matrix2D* pResult, float angle)
 // (NOTE: Remember to treat the implied w component as 1.)
 void Matrix2DMultVec(Vector2D* pResult, const Matrix2D* pMtx, const Vector2D* pVec)
 {
-	Vector2D temp = ((Vector2D) { 0 });
+	Vector2D temp = { 0.0f, 0.0f };
 
 	temp.x = Matrix2DRowCol(pMtx, 0, 0) * pVec->x + Matrix2DRowCol(pMtx, 0, 1) * pVec->y + Matrix2DRowCol(pMtx, 0, 3);
 	temp.y = Matrix2DRowCol(pMtx, 1, 0) * pVec->x + Matrix2DRowCol(pMtx, 1, 1) * pVec->y + Matrix2DRowCol(pMtx, 1, 3);

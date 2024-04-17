@@ -74,11 +74,11 @@ typedef struct Transform
 //	   else return NULL.
 Transform* TransformCreate(void)
 {
-	Transform* transform = calloc(1, sizeof(Transform));
+	Transform* transform = (Transform*)calloc(1, sizeof(Transform));
 
 	if (transform)
 	{
-		transform->scale = (Vector2D){ 1, 1 };
+		transform->scale = { 1.0f, 1.0f };
 		transform->isDirty = true;
 
 		return transform;
@@ -150,18 +150,18 @@ const Matrix2D* TransformGetMatrix(Transform* transform)
 	if (!transform->isDirty)
 		return &(transform->matrix);
 
-	Matrix2D* translation = &((Matrix2D) { 0 });
-	Matrix2DTranslate(translation, transform->translation.x, transform->translation.y);
+	Matrix2D translation = { 0.0f };
+	Matrix2DTranslate(&translation, transform->translation.x, transform->translation.y);
 
-	Matrix2D* rotation = &((Matrix2D) { 0 });
-	Matrix2DRotRad(rotation, transform->rotation);
+	Matrix2D rotation = { 0.0f };
+	Matrix2DRotRad(&rotation, transform->rotation);
 
-	Matrix2D* scale = &((Matrix2D) { 0 });
-	Matrix2DScale(scale, transform->scale.x, transform->scale.y);
+	Matrix2D scale = { 0.0f };
+	Matrix2DScale(&scale, transform->scale.x, transform->scale.y);
 
-	Matrix2D* result = &((Matrix2D) { 0 });
-	Matrix2DConcat(result, rotation, scale);
-	Matrix2DConcat(&transform->matrix, translation, result);
+	Matrix2D result = { 0.0f };
+	Matrix2DConcat(&result, &rotation, &scale);
+	Matrix2DConcat(&transform->matrix, &translation, &result);
 
 	transform->isDirty = false;
 	return &(transform->matrix);

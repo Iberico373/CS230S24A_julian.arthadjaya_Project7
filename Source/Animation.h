@@ -17,11 +17,6 @@
 
 //------------------------------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {
-	/* Assume C declarations for C++ */
-#endif
-
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -141,8 +136,3 @@ void AnimationUpdate(Animation* animation, float dt);
 bool AnimationIsDone(const Animation * animation);
 
 /*----------------------------------------------------------------------------*/
-
-#ifdef __cplusplus
-}                       /* End of extern "C" { */
-#endif
-

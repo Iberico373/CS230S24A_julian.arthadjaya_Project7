@@ -76,7 +76,7 @@ typedef struct Sprite
 //	   else return NULL.
 Sprite* SpriteCreate(void)
 {
-	Sprite* sprite = calloc(1, sizeof(Sprite));
+	Sprite* sprite = (Sprite*)calloc(1, sizeof(Sprite));
 
 	if (sprite)
 	{
@@ -165,7 +165,8 @@ void SpriteRender(const Sprite* sprite, Transform* transform)
 	DGL_Graphics_SetCB_Alpha(sprite->alpha);
 
 	// Set blend color (RGBA, A = "strength" of blend)
-	DGL_Graphics_SetCB_TintColor(&(DGL_Color) { 0.0f, 0.0f, 0.0f, 0.0f });
+	DGL_Color tint = { 0.0f, 0.0f, 0.0f, 0.0f };
+	DGL_Graphics_SetCB_TintColor(&tint);
 
 	if (!(sprite->text))
 	{

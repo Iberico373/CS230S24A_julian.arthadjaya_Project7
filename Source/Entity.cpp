@@ -96,7 +96,7 @@ typedef struct Entity
 //	   else return NULL.
 Entity* EntityCreate(void)
 {
-	Entity* entity = calloc(1, sizeof(Entity));
+	Entity* entity = (Entity*)calloc(1, sizeof(Entity));
 
 	if (entity)
 	{
@@ -424,7 +424,7 @@ bool EntityIsNamed(const Entity* entity, const char* name)
 	if (!entity)
 		return false;
 
-	if (strncmp(entity->name, name, _countof(name)) == 0)
+	if (strcmp(entity->name, name) == 0)
 		return true; 
 
 	return false; 

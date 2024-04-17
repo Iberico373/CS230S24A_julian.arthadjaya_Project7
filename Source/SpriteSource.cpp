@@ -70,7 +70,7 @@ typedef struct SpriteSource
 //	   else return NULL.
 SpriteSource* SpriteSourceCreate()
 {
-	SpriteSource* spriteSource = calloc(1, sizeof(SpriteSource));
+	SpriteSource* spriteSource = (SpriteSource*)calloc(1, sizeof(SpriteSource));
 
 	if (spriteSource)
 	{
@@ -145,7 +145,7 @@ void SpriteSourceRead(SpriteSource* spriteSource, Stream stream)
 //		else return false.
 bool SpriteSourceIsNamed(const SpriteSource* spriteSource, const char* name)
 {
-	return !strncmp(spriteSource->name, name, _countof(name));
+	return !strcmp(spriteSource->name, name);
 }
 
 // Returns the maximum number of frames possible, given the dimensions of the sprite sheet.
@@ -199,7 +199,8 @@ void SpriteSourceSetTextureOffset(const SpriteSource* spriteSource, unsigned fra
 	float v = 0.0f;
 	SpriteSourceGetUV(spriteSource, frameIndex, &u, &v);
 
-	DGL_Graphics_SetCB_TextureOffset(&(DGL_Vec2){ u, v });
+	DGL_Vec2 texOffset = { u, v };
+	DGL_Graphics_SetCB_TextureOffset(&texOffset);
 }
 
 //------------------------------------------------------------------------------

@@ -95,8 +95,10 @@ static void AsteroidsSceneLoad(void)
 // Initialize the variables used by the scene.
 static void AsteroidsSceneInit()
 {
+	DGL_Color bgColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+
 	// Set background color
-	DGL_Graphics_SetBackgroundColor(&((const DGL_Color) { 0.0f, 0.0f, 0.0f, 0.0f }));
+	DGL_Graphics_SetBackgroundColor(&bgColor);
 
 	// Set blend mode
 	DGL_Graphics_SetBlendMode(DGL_BM_BLEND);

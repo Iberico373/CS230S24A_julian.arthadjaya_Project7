@@ -55,7 +55,7 @@ static void BehaviorBulletCollisionHandler(Entity* entity1, Entity* entity2);
 // (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
 Behavior* BehaviorBulletCreate(void)
 {
-	Behavior* behavior = calloc(1, sizeof(Behavior));
+	Behavior* behavior = (Behavior*)calloc(1, sizeof(Behavior));
 
 	if (!behavior)
 		return NULL;

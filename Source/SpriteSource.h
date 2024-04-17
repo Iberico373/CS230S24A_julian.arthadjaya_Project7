@@ -17,11 +17,6 @@
 
 //------------------------------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {
-	/* Assume C declarations for C++ */
-#endif
-
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -150,8 +145,3 @@ void SpriteSourceSetTexture(const SpriteSource* spriteSource);
 void SpriteSourceSetTextureOffset(const SpriteSource* spriteSource, unsigned frameIndex);
 
 /*----------------------------------------------------------------------------*/
-
-#ifdef __cplusplus
-}                       /* End of extern "C" { */
-#endif
-

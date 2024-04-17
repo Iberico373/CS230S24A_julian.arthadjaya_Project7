@@ -51,7 +51,7 @@ Behavior* BehaviorClone(Behavior* other)
 	if (!other)
 		return NULL;
 
-	Behavior* behavior = calloc(1, other->memorySize);
+	Behavior* behavior = (Behavior*)calloc(1, other->memorySize);
 
 	if (!behavior)
 		return NULL;

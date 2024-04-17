@@ -17,10 +17,6 @@
 
 //------------------------------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {	// Assume C declarations for C++.
-#endif
-
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -86,8 +82,3 @@ void ScoreSystemIncreaseScore(unsigned amount);
 void ScoreSystemIncreaseWave(void);
 
 /*----------------------------------------------------------------------------*/
-
-#ifdef __cplusplus
-}                       // End of extern "C" {
-#endif
-

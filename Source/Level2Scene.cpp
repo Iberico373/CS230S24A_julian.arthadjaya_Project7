@@ -35,8 +35,6 @@ typedef struct Level2Scene
 	Scene	base;
 
 	// Add any scene-specific variables second.
-	Mesh* mesh;
-
 	Entity* entity;
 
 } Level2Scene;
@@ -94,8 +92,6 @@ const Scene* Level2SceneGetInstance(void)
 // Load any resources used by the scene.
 static void Level2SceneLoad(void)
 {
-	instance.mesh = MeshCreate();
-	MeshBuildSpaceship(instance.mesh);
 }
 
 // Initialize the variables used by the scene.
@@ -105,8 +101,9 @@ static void Level2SceneInit()
 
 	if (instance.entity)
 	{
-		SpriteSetMesh(EntityGetSprite(instance.entity), instance.mesh);
-		DGL_Graphics_SetBackgroundColor(&(DGL_Color) { 0, 0, 0 });
+		//SpriteSetMesh(EntityGetSprite(instance.entity), instance.mesh);
+		DGL_Color bgColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+		DGL_Graphics_SetBackgroundColor(&bgColor);
 		DGL_Graphics_SetBlendMode(DGL_BM_BLEND);
 	}
 }
@@ -121,13 +118,13 @@ static void Level2SceneMovementController(Entity* entity)
 		Vector2D mousePos = DGL_Input_GetMousePosition();
 		Vector2D worldMousePos = DGL_Camera_ScreenCoordToWorld(&mousePos);
 
-		Vector2D* direction = &(Vector2D) { 0, 0 };
-		Vector2DSub(direction, &worldMousePos, TransformGetTranslation(transform));
-		Vector2DNormalize(direction, direction);
+		Vector2D direction = { 0.0f, 0.0f };
+		Vector2DSub(&direction, &worldMousePos, TransformGetTranslation(transform));
+		Vector2DNormalize(&direction, &direction);
 
-		TransformSetRotation(transform, Vector2DToAngleRad(direction));	
-		Vector2DScale(direction, direction, spaceshipSpeed);
-		PhysicsSetVelocity(physics, direction);
+		TransformSetRotation(transform, Vector2DToAngleRad(&direction));	
+		Vector2DScale(&direction, &direction, spaceshipSpeed);
+		PhysicsSetVelocity(physics, &direction);
 	}
 }
 
@@ -173,6 +170,5 @@ static void Level2SceneExit()
 // Unload any resources used by the scene.
 static void Level2SceneUnload(void)
 {
-	MeshFree(&instance.mesh);
 }
 

@@ -57,7 +57,7 @@ typedef struct ColliderCircle
 // (Note: Set the radius to a non-zero value.  Typical values are 0.5f or 1.0f.)
 Collider* ColliderCircleCreate(void)
 {
-	ColliderCircle* collider = calloc(1, sizeof(ColliderCircle));
+	ColliderCircle* collider = (ColliderCircle*)calloc(1, sizeof(ColliderCircle));
 	
 	if (collider)
 	{

@@ -183,11 +183,11 @@ static LRESULT CALLBACK PlatformSystemCallback(_In_ HWND hWnd, _In_ UINT message
 	if (DGL_System_HandleWindowsMessage(message, wParam, lParam, &result))
 		return result;
 
-	switch (message)
+	/*switch (message)
 	{
 	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
 		break;
-	}
+	}*/
+	return DefWindowProc(hWnd, message, wParam, lParam);
 }
 

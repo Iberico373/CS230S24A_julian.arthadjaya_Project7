@@ -17,10 +17,6 @@
 
 //------------------------------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {	// Assume C declarations for C++.
-#endif
-
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -158,8 +154,3 @@ void EntityContainerRenderAll(const EntityContainer* entities);
 void EntityContainerFreeAll(EntityContainer* entities);
 
 //------------------------------------------------------------------------------
-
-#ifdef __cplusplus
-}                       // End of extern "C" {
-#endif
-

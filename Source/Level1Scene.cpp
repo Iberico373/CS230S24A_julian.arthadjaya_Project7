@@ -201,7 +201,8 @@ static void Level1SceneInit()
 		SpriteSetText(livesTextSprite, instance.livesBuffer);
 	}
 
-	DGL_Graphics_SetBackgroundColor(&(DGL_Color) { 1, 1, 1 });
+	DGL_Color bgColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+	DGL_Graphics_SetBackgroundColor(&bgColor);
 	DGL_Graphics_SetBlendMode(DGL_BM_BLEND);
 }
 
@@ -312,7 +313,8 @@ static void Level1SceneMovementController(Entity* entity)
 		// Check if planet is grounded
 		if (currentTranslation.y < groundHeight)
 		{
-			TransformSetTranslation(transform, &(Vector2D){currentTranslation.x, groundHeight});
+			Vector2D ground = { currentTranslation.x, groundHeight };
+			TransformSetTranslation(transform, &ground);
 
 			currentVelocity.y = 0;
 			PhysicsSetAcceleration(physics, &gravityNone);

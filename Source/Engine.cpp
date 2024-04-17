@@ -29,7 +29,7 @@ enum { systemMax = 10 };
 // Private Structures:
 //------------------------------------------------------------------------------
 
-typedef struct
+typedef struct Engine
 {
 	unsigned systemCount;
 	BaseSystem* systems[systemMax];

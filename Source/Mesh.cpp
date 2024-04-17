@@ -61,7 +61,7 @@ typedef struct Mesh
 //	   else return NULL.
 Mesh* MeshCreate()
 {
-	Mesh* mesh = calloc(1, sizeof(Mesh));
+	Mesh* mesh = (Mesh*)calloc(1, sizeof(Mesh));
 
 	if (mesh)
 	{
@@ -86,20 +86,37 @@ Mesh* MeshCreate()
 //	 name = A name for the mesh.
 void MeshBuildQuad(Mesh* mesh, float xHalfSize, float yHalfSize, float uSize, float vSize, const char* name)
 {
+	DGL_Color color = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+	DGL_Vec2 vert1 = { -xHalfSize, yHalfSize };
+	DGL_Vec2 vert2 = { xHalfSize, -yHalfSize };
+	DGL_Vec2 vert3 = { xHalfSize, yHalfSize };
+
+	DGL_Vec2 uvEmpty = { 0.0f, 0.0f };
+	DGL_Vec2 uvFull = { uSize, vSize };
+	DGL_Vec2 uvHalf = { uSize, 0.0f };
+
 	strcpy_s(mesh->name, _countof(mesh->name), name);
 	mesh->drawMode = DGL_DM_TRIANGLELIST;
 
 	DGL_Graphics_StartMesh();
 
 	DGL_Graphics_AddTriangle(
-		&(DGL_Vec2){ -xHalfSize, yHalfSize}, &(DGL_Color){ 0.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
-		&(DGL_Vec2){ xHalfSize, -yHalfSize}, &(DGL_Color){ 0.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ uSize, vSize },
-		&(DGL_Vec2){ xHalfSize, yHalfSize}, &(DGL_Color){ 0.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ uSize, 0.0f }
+		&vert1, &color, &uvEmpty,	// uvEmpty
+		&vert2, &color, &uvFull,	// uvFull
+		&vert3, &color, &uvHalf		// uvHalf
 	);
+
+	vert2.x = -xHalfSize;
+	vert3.y = -yHalfSize;
+
+	uvHalf.x = 0.0f;
+	uvHalf.y = vSize;
+
 	DGL_Graphics_AddTriangle(
-		&(DGL_Vec2){ -xHalfSize, yHalfSize}, &(DGL_Color){ 0.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
-		&(DGL_Vec2){ -xHalfSize, -yHalfSize}, &(DGL_Color){ 0.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, vSize },
-		&(DGL_Vec2){ xHalfSize, -yHalfSize}, &(DGL_Color){ 0.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ uSize, vSize }
+		&vert1, &color, &uvEmpty,	// uvEmpty
+		&vert2, &color, &uvHalf,	// uvHalf
+		&vert3, &color, &uvFull		// uvFull
 	);
 
 	mesh->meshResource =  DGL_Graphics_EndMesh();
@@ -115,22 +132,22 @@ void MeshBuildQuad(Mesh* mesh, float xHalfSize, float yHalfSize, float uSize, fl
 // (NOTE: The drawMode should be set to DGL_DM_TRIANGLELIST.)
 // Params:
 //   mesh = Pointer to an existing, empty Mesh object.
-void MeshBuildSpaceship(Mesh* mesh)
-{
-	strcpy_s(mesh->name, _countof(mesh->name), "spaceship");
-	mesh->drawMode = DGL_DM_TRIANGLELIST;
-
-	DGL_Graphics_StartMesh();
-
-	DGL_Graphics_AddTriangle(
-		&(DGL_Vec2){ 0.5f, 0.0f}, &(DGL_Color){ 1.0f, 1.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
-		&(DGL_Vec2){ -0.5f, -0.5f}, &(DGL_Color){ 1.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
-		&(DGL_Vec2){ -0.5f, 0.5f}, &(DGL_Color){ 1.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f }
-	);
-
-	mesh->meshResource =  DGL_Graphics_EndMesh();
-	assert(mesh->meshResource && "Failed to create meshColor!");
-}
+//void MeshBuildSpaceship(Mesh* mesh)
+//{
+//	strcpy_s(mesh->name, _countof(mesh->name), "spaceship");
+//	mesh->drawMode = DGL_DM_TRIANGLELIST;
+//
+//	DGL_Graphics_StartMesh();
+//
+//	DGL_Graphics_AddTriangle(
+//		&(DGL_Vec2){ 0.5f, 0.0f}, &(DGL_Color){ 1.0f, 1.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
+//		&(DGL_Vec2){ -0.5f, -0.5f}, &(DGL_Color){ 1.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
+//		&(DGL_Vec2){ -0.5f, 0.5f}, &(DGL_Color){ 1.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f }
+//	);
+//
+//	mesh->meshResource =  DGL_Graphics_EndMesh();
+//	assert(mesh->meshResource && "Failed to create meshColor!");
+//}
 
 // Read the properties of a Mesh object from a file.
 // (NOTE: First, read a token from the file and verify that it is "Mesh".)
@@ -145,7 +162,7 @@ void MeshRead(Mesh* mesh, Stream stream)
 {
 	if ((strncmp(StreamReadToken(stream), "Quad", _countof("Quad")) == 0))
 	{
-		Vector2D halfSize;
+		Vector2D halfSize = { 0.0f, 0.0f };
 		StreamReadVector2D(stream, &halfSize);
 
 		int col = StreamReadInt(stream);
@@ -167,9 +184,9 @@ void MeshRead(Mesh* mesh, Stream stream)
 
 		DGL_Graphics_StartMesh();
 
-		Vector2D position;
-		DGL_Color color;
-		Vector2D uv;
+		Vector2D position = { 0.0f, 0.0f };
+		DGL_Color color = { 0.0f, 0.0f, 0.0f, 0.0f};
+		Vector2D uv = { 0.0f, 0.0f };
 
 		for (int i = 0; i < vertices; ++i)
 		{
@@ -195,7 +212,7 @@ void MeshRead(Mesh* mesh, Stream stream)
 //		else return false.
 bool MeshIsNamed(const Mesh* mesh, const char* name)
 {
-	if (strncmp(mesh->name, name, _countof(name)) == 0)
+	if (strcmp(mesh->name, name) == 0)
 		return true;
 
 	return false;
@@ -218,7 +235,7 @@ void MeshRender(const Mesh* mesh)
 //   mesh = Pointer to the Mesh pointer.
 void MeshFree(Mesh** mesh)
 {
-	DGL_Graphics_FreeMesh(&((*mesh)->meshResource));
+	DGL_Graphics_FreeMesh((DGL_Mesh**) & ((*mesh)->meshResource));
 	free(*mesh);
 	*mesh = NULL;
 }

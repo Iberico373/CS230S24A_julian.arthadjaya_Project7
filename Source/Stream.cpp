@@ -128,7 +128,8 @@ void StreamReadColor(Stream stream, DGL_Color* color)
 	if (!stream || !color)
 		return;
 
-	*color = (DGL_Color){ StreamReadFloat(stream) , StreamReadFloat(stream) , StreamReadFloat(stream), StreamReadFloat(stream) };
+	DGL_Color result = { StreamReadFloat(stream), StreamReadFloat(stream), StreamReadFloat(stream), StreamReadFloat(stream) };
+	*color = result;
 }
 
 // Read a token (a single word) from a file.

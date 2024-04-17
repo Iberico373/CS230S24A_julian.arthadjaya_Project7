@@ -113,7 +113,7 @@ static void EntityListDeleteNode(EntityList* pList, Entity* value);
 //	   else return NULL.
 EntityContainer* EntityContainerCreate()
 {
-	EntityContainer* entityContainer = calloc(1, sizeof(EntityContainer));
+	EntityContainer* entityContainer = (EntityContainer*)calloc(1, sizeof(EntityContainer));
 
 	if (entityContainer)
 	{
@@ -323,7 +323,7 @@ static Node* NodeGetNext(Node* node)
 // create a new empty List strcuture 
 static EntityList* EntityListCreate()
 {
-	EntityList* ret_val = calloc(1, sizeof(EntityList));     // Create list object
+	EntityList* ret_val = (EntityList*)calloc(1, sizeof(EntityList));     // Create list object
 
 	if (!ret_val)
 		return NULL;
@@ -455,7 +455,7 @@ static void EntityListDeleteNode(EntityList* pList, Entity* value)
 
 static Node* ConstructNode(Entity* data, Node* next)
 {
-	Node* pNode = calloc(1, sizeof(Node));    // Allocate memory for node
+	Node* pNode = (Node*)calloc(1, sizeof(Node));    // Allocate memory for node
 
 	if (!pNode)
 		return NULL;

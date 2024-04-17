@@ -17,10 +17,6 @@
 
 //------------------------------------------------------------------------------
 
-#ifdef __cplusplus
-extern "C" {	// Assume C declarations for C++.
-#endif
-
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
@@ -95,8 +91,3 @@ void SceneAddEntity(Entity* entity);
 Entity* SceneFindEntityByName(const char* entityName);
 
 //------------------------------------------------------------------------------
-
-#ifdef __cplusplus
-}                       // End of extern "C" {
-#endif
-

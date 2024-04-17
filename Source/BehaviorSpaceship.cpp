@@ -80,7 +80,7 @@ static void BehaviorSpaceshipCollisionHandler(Entity* entity1, Entity* entity2);
 // (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
 Behavior* BehaviorSpaceshipCreate(void)
 {
-	Behavior* behavior = calloc(1, sizeof(Behavior));
+	Behavior* behavior = (Behavior*)calloc(1, sizeof(Behavior));
 
 	if (!behavior)
 		return NULL;
@@ -112,7 +112,8 @@ void BehaviorSpaceshipInit(Behavior* behavior)
 	if (behavior->stateCurr == cSpaceshipDead)
 	{
 		behavior->timer = spaceshipDeathDuration;
-		PhysicsSetVelocity(EntityGetPhysics(behavior->parent), &(Vector2D) { 0.0f, 0.0f });
+		Vector2D zero = { 0.0f, 0.0f };
+		PhysicsSetVelocity(EntityGetPhysics(behavior->parent), &zero);
 		EntitySetName(behavior->parent, "DeadShip");
 	}
 		
@@ -172,10 +173,6 @@ void BehaviorSpaceshipUpdate(Behavior* behavior, float dt)
 			SceneRestart();
 		
 		break;
-
-	default:
-		break;
-
 	}
 
 	TeleporterUpdateEntity(behavior->parent);
@@ -219,7 +216,7 @@ static void BehaviorSpaceshipUpdateVelocity(Behavior* behavior, float dt)
 
 	if (transform && physics)
 	{
-		Vector2D rotation;
+		Vector2D rotation = { 0.0f, 0.0f };
 		Vector2DFromAngleRad(&rotation, TransformGetRotation(transform));
 
 		Vector2D velocity = *PhysicsGetVelocity(physics);
@@ -268,7 +265,7 @@ static void BehaviorSpaceshipSpawnBullet(Behavior* behavior)
 		TransformSetTranslation(EntityGetTransform(bullet), &position);
 		TransformSetRotation(EntityGetTransform(bullet), rotation);
 
-		Vector2D direction;
+		Vector2D direction = { 0.0f, 0.0f };
 		Vector2DFromAngleRad(&direction, rotation);
 		Vector2DScale(&direction, &direction, spaceshipWeaponBulletSpeed);
 		PhysicsSetVelocity(EntityGetPhysics(bullet), &direction);

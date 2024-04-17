@@ -124,7 +124,7 @@ void MeshLibraryFreeAll()
 {
 	for (unsigned int i = 0; i < meshes.meshCount; ++i)
 	{
-		MeshFree(&(meshes.meshList[i]));
+		MeshFree((Mesh**) & (meshes.meshList[i]));
 	}
 
 	meshes.meshCount = 0;

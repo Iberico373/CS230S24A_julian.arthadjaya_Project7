@@ -56,7 +56,7 @@ Collider* ColliderClone(const Collider* other)
 	if (!other)
 		return NULL;
 
-	Collider* clone = calloc(1, other->memorySize);
+	Collider* clone = (Collider*)calloc(1, other->memorySize);
 
 	if (clone)
 	{

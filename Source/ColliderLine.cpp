@@ -70,7 +70,7 @@ typedef struct ColliderLine
 // (Hint: Make sure to initialize the ColliderType and memorySize correctly.)
 Collider* ColliderLineCreate(void)
 {
-	ColliderLine* collider = calloc(1, sizeof(ColliderLine));
+	ColliderLine* collider = (ColliderLine*)calloc(1, sizeof(ColliderLine));
 
 	if (collider)
 	{
@@ -99,10 +99,10 @@ void ColliderLineRead(Collider* collider, Stream stream)
 	// Read lines
 	for (unsigned int i = 0; i < colliderLine->lineSize; ++i)
 	{
-		Vector2D p0;
+		Vector2D p0 = { 0.0f, 0.0f };
 		StreamReadVector2D(stream, &p0);
 
-		Vector2D p1;
+		Vector2D p1 = { 0.0f, 0.0f };
 		StreamReadVector2D(stream, &p1);
 
 		ColliderLineAddLineSegment(collider, &p0, &p1);
