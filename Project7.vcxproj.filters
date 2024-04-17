@@ -179,6 +179,9 @@
     <ClCompile Include="Source\ScoreSystem.cpp">
       <Filter>Game\Systems\Score System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Component.cpp">
+      <Filter>Engine\Entities\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Stub.h">
@@ -303,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="Source\ScoreSystem.h">
       <Filter>Game\Systems\Score System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component.h">
+      <Filter>Engine\Entities\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
