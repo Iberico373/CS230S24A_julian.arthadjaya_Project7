@@ -12,7 +12,6 @@
 #include "stdafx.h"
 
 #include "Component.h"
-#include "Entity.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -38,17 +37,11 @@
 // Public Functions:
 //------------------------------------------------------------------------------
 
-Component::~Component() { };
-
-void Component::Update(float dt) { UNREFERENCED_PARAMETER(dt); }
-
-void Component::Render() { }
-
-ComponentType Component::GetType() { return type; }
-
-Entity* Component::GetParent() { return parent; }
-
-void Component::SetParent(Entity* _parent) { parent = _parent; }
+Component::Component(Component::ComponentType type)
+	: mType(type)
+	, mParent(nullptr)
+{
+}
 
 //------------------------------------------------------------------------------
 // Private Functions:

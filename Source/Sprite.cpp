@@ -11,15 +11,6 @@
 
 #include "stdafx.h"
 #include "Sprite.h"
-#include "Stream.h"
-#include "Trace.h"
-#include "SpriteSource.h"
-#include "Transform.h"
-#include "Mesh.h"
-#include "Matrix2D.h"
-#include "DGL.h"
-#include "MeshLibrary.h"
-#include "SpriteSourceLibrary.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -28,27 +19,6 @@
 //------------------------------------------------------------------------------
 // Private Structures:
 //------------------------------------------------------------------------------
-
-// You are free to change the contents of this structure as long as you do not
-//   change the public interface declared in the header.
-typedef struct Sprite
-{
-	// The frame currently being displayed (for sprite sheets).
-	unsigned int frameIndex;
-
-	// The alpha transparency to use when drawing the sprite.
-	float alpha;
-
-	// The sprite source used when drawing (NULL = simple colored mesh).
-	const SpriteSource* spriteSource;
-
-	// The mesh used to draw the sprite.
-	const Mesh* mesh;
-
-	// Zero-terminated string used to display sprite text.
-	const char* text;
-
-} Sprite;
 
 //------------------------------------------------------------------------------
 // Public Variables:
@@ -67,70 +37,35 @@ typedef struct Sprite
 //------------------------------------------------------------------------------
 
 
-// Dynamically allocate a new Sprite component.
-// (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
-// (NOTE: You must initialize the 'alpha' member variable to 1.0f.)
-// Returns:
-//	 If the memory allocation was successful,
-//	   then return a pointer to the allocated memory,
-//	   else return NULL.
-Sprite* SpriteCreate(void)
+Sprite::Sprite()
+	: Component(Component::Sprite)
+	, mFrameIndex(0)
+	, mAlpha(1.0f)
+	, mSpriteSource(nullptr)
+	, mMesh(nullptr)
+	, mText("")
 {
-	Sprite* sprite = (Sprite*)calloc(1, sizeof(Sprite));
-
-	if (sprite)
-	{
-		sprite->alpha = 1.0f;
-
-		return sprite;
-	}
-
-	return NULL;
 }
 
-// Dynamically allocate a clone of an existing Sprite.
-// (Hint: Perform a shallow copy of the member variables.)
-// Params:
-//	 other = Pointer to the component to be cloned.
-// Returns:
-//	 If 'other' is valid and the memory allocation was successful,
-//	   then return a pointer to the cloned component,
-//	   else return NULL.
-Sprite* SpriteClone(const Sprite* other)
+Sprite::Sprite(const Sprite& other) : Component(other)
 {
-	if (!other)
-		return NULL;
-
-	Sprite* sprite = SpriteCreate();
-
-	if (!sprite)
-		return NULL;
-
-	*sprite = *other;
-
-	return sprite;
+	*this = other;
 }
 
-// Free the memory associated with a Sprite component.
-// (NOTE: The Sprite pointer must be set to NULL.)
-// Params:
-//	 sprite = Pointer to the Sprite pointer.
-void SpriteFree(Sprite** sprite)
+Component* Sprite::Clone() const
 {
-	free(*sprite);
-	*sprite = NULL;
+	return new Sprite(*this);
 }
 
-// Read the properties of a Sprite component from a file.
-// [NOTE: Read the frameIndex value using StreamReadInt.]
-// [NOTE: Read the alpha value using StreamReadFloat.]
-// Params:
-//	 sprite = Pointer to the Sprite component.
-//	 stream = The data stream used for reading.
-void SpriteRead(Sprite* sprite, Stream stream)
+void Sprite::Render(Transform* transform)
 {
-	sprite->frameIndex = StreamReadInt(stream);
-	sprite->alpha = StreamReadFloat(stream);
+
+}
+
+void Sprite::SpriteRead(Stream stream)
+{
+	mFrameIndex = StreamReadInt(stream);
+	mAlpha = StreamReadFloat(stream);
 	SpriteSetMesh(sprite,  MeshLibraryBuild(StreamReadToken(stream)));
 	SpriteSetSpriteSource(sprite, SpriteSourceLibraryBuild(StreamReadToken(stream)));
 }

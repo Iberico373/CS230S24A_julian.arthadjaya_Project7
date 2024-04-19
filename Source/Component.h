@@ -15,6 +15,8 @@
 // Include Files:
 //------------------------------------------------------------------------------
 
+#include "Entity.h"
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -28,17 +30,6 @@
 //------------------------------------------------------------------------------
 // Public Typedefs:
 //------------------------------------------------------------------------------
-typedef struct Entity Entity;
-
-typedef enum ComponentType
-{
-	Animation,
-	Behavior,
-	Collider,
-	Physics,
-	Sprite,
-	Transform
-} ComponentType;
 
 //------------------------------------------------------------------------------
 // Public Classes:
@@ -46,21 +37,35 @@ typedef enum ComponentType
 class Component
 {
 public:
-	virtual ~Component();
+	typedef enum ComponentType
+	{
+		Animation,
+		Behavior,
+		Collider,
+		Physics,
+		Sprite,
+		Transform
+	} ComponentType;
+
+	Component(ComponentType type);
+
+	virtual ~Component() { };
+
+	__inline ComponentType Type() const { return mType; }
+
+	__inline void Parent(Entity* parent) { mParent = parent; }
+	__inline Entity* Parent() const { return mParent; }
 
 	virtual Component* Clone(void) const = 0;
-	virtual void Update(float dt);
-	virtual void Render();
 
-	ComponentType GetType();
+	virtual void Update(float dt) { UNREFERENCED_PARAMETER(dt); }
 
-	Entity* GetParent();
-	void SetParent(Entity* _parent);
+	virtual void Render() const { };
 
 private:
-	ComponentType type;
-	Entity* parent;
-}
+	ComponentType mType;
+	Entity* mParent;
+};
 
 //------------------------------------------------------------------------------
 // Public Variables:

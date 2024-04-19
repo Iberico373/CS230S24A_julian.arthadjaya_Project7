@@ -123,32 +123,6 @@ void MeshBuildQuad(Mesh* mesh, float xHalfSize, float yHalfSize, float uSize, fl
 	assert(mesh->meshResource && "Failed to create meshColor!");
 }
 
-// Build a "spaceship" mesh and store it in the specified Mesh object.
-// (NOTE: This must be a "unit"-sized triangular mesh with the same characteristics as
-//    the "triangular, colored mesh" created in DemoScene.c.)
-// (NOTE: The DGL_Mesh object must be created using DGL_Graphics_StartMesh,
-//    DGL_Graphics_AddTriangle, and DGL_Graphics_EndMesh.)
-// (NOTE: The Mesh name can be stored using strcpy_s().)
-// (NOTE: The drawMode should be set to DGL_DM_TRIANGLELIST.)
-// Params:
-//   mesh = Pointer to an existing, empty Mesh object.
-//void MeshBuildSpaceship(Mesh* mesh)
-//{
-//	strcpy_s(mesh->name, _countof(mesh->name), "spaceship");
-//	mesh->drawMode = DGL_DM_TRIANGLELIST;
-//
-//	DGL_Graphics_StartMesh();
-//
-//	DGL_Graphics_AddTriangle(
-//		&(DGL_Vec2){ 0.5f, 0.0f}, &(DGL_Color){ 1.0f, 1.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
-//		&(DGL_Vec2){ -0.5f, -0.5f}, &(DGL_Color){ 1.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f },
-//		&(DGL_Vec2){ -0.5f, 0.5f}, &(DGL_Color){ 1.0f, 0.0f, 0.0f, 1.0f}, &(DGL_Vec2){ 0.0f, 0.0f }
-//	);
-//
-//	mesh->meshResource =  DGL_Graphics_EndMesh();
-//	assert(mesh->meshResource && "Failed to create meshColor!");
-//}
-
 // Read the properties of a Mesh object from a file.
 // (NOTE: First, read a token from the file and verify that it is "Mesh".)
 // (NOTE: Second, read a token and store it in the Mesh's name variable.)

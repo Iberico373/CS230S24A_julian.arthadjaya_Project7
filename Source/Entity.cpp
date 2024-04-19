@@ -11,20 +11,6 @@
 
 #include "stdafx.h"
 #include "Entity.h"
-#include "Animation.h"
-#include "Physics.h"
-#include "Sprite.h"
-#include "Transform.h"
-#include "Stream.h"
-#include "Behavior.h"
-#include "BehaviorSpaceship.h"
-#include "BehaviorBullet.h"
-#include "BehaviorAsteroid.h"
-#include "BehaviorHudText.h"
-#include "Collider.h"
-#include "ColliderCircle.h"
-#include "ColliderLine.h"
-#include "Scene.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -63,12 +49,71 @@
 //	   else return NULL.
 Entity::Entity(const Entity& other)
 {
-	EntitySetName(other.name);
-	isDestroyed = false;
+	this->Name(other.mName);
+	mIsDestroyed = false;
 
-	for (auto component : other.components)
+	for (auto component : other.mComponents)
 	{
 		EntityAddComponent(component->Clone());
+	}
+}
+
+void Entity::EntityDestroy()
+{
+	mIsDestroyed = true;
+}
+
+bool Entity::EntityIsDestroyed()
+{
+	return mIsDestroyed;
+}
+
+void Entity::EntityAddComponent(Component* component)
+{
+	if (component)
+	{
+		// Set the component's parent
+		component->Parent(this);
+
+		// Add the component to the components array
+		Component::ComponentType type = component->Type();
+		mComponents[type] = component;
+	}
+}
+
+Component* Entity::EntityGet(Component::ComponentType type)
+{
+	return mComponents[type];
+}
+
+void Entity::Name(const char* name)
+{
+	strcpy(mName, name); 
+}
+
+const char* Entity::Name()
+{
+	return mName;
+}
+
+bool Entity::EntityIsNamed(const char* name)
+{
+	return !(strcmp(mName, name));
+}
+
+void Entity::EntityUpdate(float dt)
+{
+	for (auto component : mComponents)
+	{
+		component->Update(dt);
+	}
+}
+
+void Entity::EntityRender()
+{
+	for (auto component : mComponents)
+	{
+		component->Render();
 	}
 }
 

@@ -16,6 +16,20 @@
 //------------------------------------------------------------------------------
 
 #include <vector>
+#include "Animation.h"
+#include "Physics.h"
+#include "Sprite.h"
+#include "Transform.h"
+#include "Stream.h"
+#include "Behavior.h"
+#include "BehaviorSpaceship.h"
+#include "BehaviorBullet.h"
+#include "BehaviorAsteroid.h"
+#include "BehaviorHudText.h"
+#include "Collider.h"
+#include "ColliderCircle.h"
+#include "ColliderLine.h"
+#include "Scene.h"
 #include "Component.h"
 
 //------------------------------------------------------------------------------
@@ -38,11 +52,6 @@ class Entity
 {
 public:
 	Entity(const Entity& other);
-
-	// Free the memory associated with an Entity.
-	// (NOTE: All attached components must be freed using the corresponding Free() functions.)
-	// (NOTE: The Entity pointer must be set to NULL.)
-	~Entity();
 
 	// Read (and construct) the components associated with a entity.
 	// Params:
@@ -67,25 +76,20 @@ public:
 	// Add specified component
 	void EntityAddComponent(Component* component);
 
+	template<typename type>
+	type* EntityGetComponent(Component::ComponentType type)
+	{
+		return static_cast<type*>EntityGet(type);
+	}
+
 	// Get specified component in entity
-	Component* EntityGetComponent(ComponentType type);
+	Component* EntityGet(Component::ComponentType type);
 
 	// Set the Entity's name.
-	// [NOTE: Verify that both pointers are valid before setting the name.]
-	// [NOTE: When setting the name, use strcpy_s() to reduce the risk of
-	//	 buffer overruns. Additionally, do NOT hardcode the number "32" when
-	//	 calling this function!  Instead, use the _countof() macro to get the
-	//	 size of the "name" array.]
-	// Params:
-	//	 name = Pointer to the Entity's new name.
-	void EntitySetName(const char* name);
+	void Name(const char* name);
 
 	// Get the Entity's name.
-	// Returns:
-	//	 If the Entity pointer is valid,
-	//		then return a pointer to the Entity's name,
-	//		else return NULL.
-	const char* EntityGetName();
+	const char* Name();
 
 	// Compare the Entity's name with the specified name.
 	// Params:
@@ -110,13 +114,13 @@ public:
 
 private:
 	// The name of the entity.
-	char name[32];
+	char mName[32];
 
 	// Flag to indicate that the Entity should be destroyed after it has been updated.
-	bool isDestroyed;
+	bool mIsDestroyed;
 
 	// Container containing all components
-	std::vector<Component*> components;
+	std::vector<Component*> mComponents;
 }
 
 //------------------------------------------------------------------------------
