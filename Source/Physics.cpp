@@ -49,7 +49,7 @@ Physics::Physics()
 	mVelocity = { 0.0f, 0.0f };
 }
 
-Physics::Physics(const Physics& other) : Component(cPhysics)
+Physics::Physics(const Physics& other) : Component(other.Type())
 {
 	*this = other;
 }
