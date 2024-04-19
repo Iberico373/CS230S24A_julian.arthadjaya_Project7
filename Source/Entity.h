@@ -57,6 +57,9 @@ public:
 		return static_cast<type*>(Get(typeId));
 	}
 
+	// Free the memory associated with an Entity.
+	void Free();
+
 	// Read (and construct) the components associated with a entity.
 	void Read(Stream stream);
 

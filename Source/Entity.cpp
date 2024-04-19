@@ -79,6 +79,15 @@ Component* Entity::Get(Component::ComponentType type)
 	return mComponents[type];
 }
 
+// Free the memory associated with an Entity.
+void Entity::Free()
+{
+	for (auto component : mComponents)
+	{
+		delete component;
+	}
+}
+
 // Read (and construct) the components associated with a entity.
 void Entity::Read(Stream stream)
 {
@@ -97,7 +106,33 @@ void Entity::Read(Stream stream)
 				EntityAddAnimation(entity, animation);
 			}
 
-			else if (strncmp(token, "BehaviorSpaceship", _countof("BehaviorSpaceship")) == 0)
+			else if (strncmp(token, "Physics", _countof("Physics")) == 0)
+			{
+				Physics* physics = PhysicsCreate();
+				PhysicsRead(physics, stream);
+				EntityAddPhysics(entity, physics);
+			}
+
+			else if (strncmp(token, "Sprite", _countof("Sprite")) == 0)
+			{
+				Sprite* sprite = SpriteCreate();
+				SpriteRead(sprite, stream);
+				EntityAddSprite(entity, sprite);
+			}
+
+			else if (strncmp(token, "Transform", _countof("Transform")) == 0)
+			{
+				Transform* transform = TransformCreate();
+				TransformRead(transform, stream);
+				EntityAddTransform(entity, transform);
+			}
+
+			else
+			{
+				break;
+			}
+
+			/*else if (strncmp(token, "BehaviorSpaceship", _countof("BehaviorSpaceship")) == 0)
 			{
 				Behavior* behavior = BehaviorSpaceshipCreate();
 				BehaviorRead(behavior, stream);
@@ -137,33 +172,7 @@ void Entity::Read(Stream stream)
 				Collider* collider = ColliderLineCreate();
 				ColliderLineRead(collider, stream);
 				EntityAddCollider(entity, collider);
-			}
-
-			else if (strncmp(token, "Physics", _countof("Physics")) == 0)
-			{
-				Physics* physics = PhysicsCreate();
-				PhysicsRead(physics, stream);
-				EntityAddPhysics(entity, physics);
-			}
-
-			else if (strncmp(token, "Sprite", _countof("Sprite")) == 0)
-			{
-				Sprite* sprite = SpriteCreate();
-				SpriteRead(sprite, stream);
-				EntityAddSprite(entity, sprite);
-			}
-
-			else if (strncmp(token, "Transform", _countof("Transform")) == 0)
-			{
-				Transform* transform = TransformCreate();
-				TransformRead(transform, stream);
-				EntityAddTransform(entity, transform);
-			}
-
-			else
-			{
-				break;
-			}
+			}*/
 		}
 	}
 }

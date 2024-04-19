@@ -63,6 +63,13 @@ Sprite::Sprite(const Sprite& other) : Component(other.Type())
 	*this = other;
 }
 
+// Free the memory associated with a Sprite component.
+Sprite::~Sprite()
+{
+	delete mSpriteSource;
+	delete mMesh;
+}
+
 Component* Sprite::Clone() const
 {
 	return new Sprite(*this);
