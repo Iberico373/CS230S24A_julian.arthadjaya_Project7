@@ -12,7 +12,6 @@
 #include "stdafx.h"
 #include "Physics.h"
 #include "Vector2D.h"
-#include "Transform.h"
 #include "Stream.h"
 
 //------------------------------------------------------------------------------
@@ -22,29 +21,6 @@
 //------------------------------------------------------------------------------
 // Private Structures:
 //------------------------------------------------------------------------------
-
-typedef struct Physics
-{
-	// Previous position.  May be used for resolving collisions.
-	Vector2D	oldTranslation;
-
-	// Acceleration = inverseMass * (sum of forces)
-	Vector2D	acceleration;
-
-	// Velocity may be stored as a direction vector and speed scalar, instead.
-	Vector2D	velocity;
-
-	// Rotational velocity (in radians).
-	float rotationalVelocity;
-
-	// Drag to be applied to moving objects in order to slow them down.
-	float drag;
-
-	// Used when calculating acceleration due to forces.
-	// Used when resolving collision between two dynamic objects.
-	//float		inverseMass;
-
-} Physics;
 
 //------------------------------------------------------------------------------
 // Public Variables:
@@ -63,195 +39,103 @@ typedef struct Physics
 //------------------------------------------------------------------------------
 
 // Dynamically allocate a new Physics component.
-// (Hint: Use calloc() to ensure that all member variables are initialized to 0.)
-// Returns:
-//	 If the memory allocation was successful,
-//	   then return a pointer to the allocated memory,
-//	   else return NULL.
-Physics* PhysicsCreate(void)
+Physics::Physics()
+	: Component(cPhysics)
+	, mRotationalVelocity(0.0f)
+	, mDrag(1.0f)
 {
-	Physics* physics = (Physics*)calloc(1, sizeof(Physics));
+	mOldTranslation = { 0.0f, 0.0f };
+	mAcceleration = { 0.0f, 0.0f };
+	mVelocity = { 0.0f, 0.0f };
+}
 
-	if (physics)
-	{
-		PhysicsSetDrag(physics, 1.0f);
-		return physics;
-	}
-
-	return NULL;
+Physics::Physics(const Physics& other) : Component(cPhysics)
+{
+	*this = other;
 }
 
 // Dynamically allocate a clone of an existing Physics component.
-// (Hint: Perform a shallow copy of the member variables.)
-// Params:
-//	 other = Pointer to the component to be cloned.
-// Returns:
-//	 If 'other' is valid and the memory allocation was successful,
-//	   then return a pointer to the cloned component,
-//	   else return NULL.
-Physics* PhysicsClone(const Physics* other)
-{
-	if (!other)
-		return NULL;
+Component* Physics::Clone() const
+{	
 
-	Physics* physics = PhysicsCreate();
-
-	if (!physics)
-		return NULL;
-
-	*physics = *other;
-
-	return physics;
+	return new Physics(*this);
 }
 
-// Free the memory associated with a Physics component.
-// (NOTE: The Physics pointer must be set to NULL.)
-// Params:
-//	 physics = Pointer to the Physics component pointer.
-void PhysicsFree(Physics** physics)
+// Update the state of a Physics component using the Semi-Implicit Euler method
+void Physics::Update(float dt)
 {
-	free(*physics);
-	*physics = NULL;
-}
+	Transform* transform = Parent()->Has(Transform);
 
-// Read the properties of a Physics component from a file.
-// [NOTE: Read the acceleration and velocity values using StreamReadVector2D.]
-// Params:
-//	 physics = Pointer to the Physics component.
-//	 stream = Pointer to the data stream used for reading.
-void PhysicsRead(Physics* physics, Stream stream)
-{
-	StreamReadVector2D(stream, &(physics->acceleration));
-	StreamReadVector2D(stream, &(physics->velocity));
-}
-
-// Get the acceleration of a Physics component.
-// Params:
-//	 physics = Pointer to the Physics component.
-// Returns:
-//	 If the physics pointer is valid,
-//		then return a pointer to the component's acceleration structure,
-//		else return a NULL pointer.
-const Vector2D* PhysicsGetAcceleration(const Physics* physics)
-{
-	if (physics)
-	{
-		return &(physics->acceleration);
-	}
-
-	return NULL;
-}
-
-// Get the velocity of a Physics component.
-// Params:
-//	 physics = Pointer to the Physics component.
-// Returns:
-//	 If the physics pointer is valid,
-//		then return a pointer to the component's velocity structure,
-//		else return a NULL pointer.
-const Vector2D* PhysicsGetVelocity(const Physics* physics)
-{
-	if (physics)
-	{
-		return &(physics->velocity);
-	}
-
-	return NULL;
-}
-
-// Get the rotational velocity of a physics component.
-// Params:
-//	 physics = Pointer to the physics component.
-// Returns:
-//	 If the physics pointer is valid,
-//		then return the component's rotational velocity value,
-//		else return 0.0f.
-float PhysicsGetRotationalVelocity(const Physics* physics)
-{
-	if (!physics)
-		return 0.0f;
-
-	return physics->rotationalVelocity;
-}
-
-// Get the old translation (position) of a Physics component.
-// Params:
-//	 physics = Pointer to the Physics component.
-// Returns:
-//	 If the physics pointer is valid,
-//		then return a pointer to the component's oldTranslation structure,
-//		else return a NULL pointer.
-const Vector2D* PhysicsGetOldTranslation(Physics* physics)
-{
-	if (physics)
-	{
-		return &(physics->oldTranslation);
-	}
-
-	return NULL;
-}
-
-// Set the acceleration of a Physics component.
-// Params:
-//	 physics = Pointer to the Physics component.
-//	 acceleration = Pointer to an acceleration vector.
-void PhysicsSetAcceleration(Physics* physics, const Vector2D* acceleration)
-{
-	physics->acceleration = *acceleration;
-}
-
-// Set the velocity of a Physics component.
-// Params:
-//	 physics = Pointer to the Physics component.
-//	 velocity = Pointer to a velocity vector.
-void PhysicsSetVelocity(Physics* physics, const Vector2D* velocity)
-{
-	physics->velocity = *velocity;
-}
-
-// Set the rotational velocity of a physics component.
-// Params:
-//	 physics = Pointer to the physics component.
-//	 rotationalVelocity = The new rotational velocity.
-void PhysicsSetRotationalVelocity(Physics* physics, float rotationalVelocity)
-{
-	physics->rotationalVelocity = rotationalVelocity;
-}
-
-// Set the "drag" value of a Physics component.
-// (NOTE: This value should be clamped between [0.0f, 1.0f].
-// Params:
-//	 physics = Pointer to the physics component.
-//	 drag = The new drag value.
-void PhysicsSetDrag(Physics* physics, float drag)
-{
-	physics->drag = drag;
-}
-
-// Update the state of a Physics component using the Semi-Implicit Euler method,
-//	 as outlined in the "Dynamics" lecture slides and the project instructions.
-// (NOTE: This function must verify that the Physics and Transform pointers are valid.)
-// Params:
-//	 physics = Pointer to the physics component.
-//	 transform = Pointer to the associated transform component.
-//	 dt = Change in time (in seconds) since the last game loop.
-void PhysicsUpdate(Physics* physics, Transform* transform, float dt)
-{
-	if (physics && transform)
+	if (transform)
 	{
 		// Set translation
-		physics->oldTranslation = *TransformGetTranslation(transform);
+		mOldTranslation = *TransformGetTranslation(transform);
 		Vector2D newTranslation = { 0, 0 };
 
-		Vector2DScaleAdd(&(physics->velocity), &(physics->acceleration), &(physics->velocity), dt);
-		Vector2DScale(&(physics->velocity), &(physics->velocity), physics->drag);
-		Vector2DScaleAdd(&newTranslation, &(physics->velocity), &physics->oldTranslation, dt);
+		Vector2DScaleAdd(&(mVelocity), &(mAcceleration), &(mVelocity), dt);
+		Vector2DScale(&(mVelocity), &(mVelocity), mDrag);
+		Vector2DScaleAdd(&newTranslation, &(mVelocity), &mOldTranslation, dt);
 		TransformSetTranslation(transform, &newTranslation);
 
 		// Set rotation
-		float rotation = TransformGetRotation(transform) + (physics->rotationalVelocity * dt);
+		float rotation = TransformGetRotation(transform) + (mRotationalVelocity * dt);
 		TransformSetRotation(transform, rotation);
 	}
+}
+
+// Read the properties of a Physics component from a file.
+void Physics::Read(Stream stream)
+{
+	StreamReadVector2D(stream, &(mAcceleration));
+	StreamReadVector2D(stream, &(mVelocity));
+}
+
+// Get the acceleration of a Physics component.
+const Vector2D* Physics::GetAcceleration() const
+{
+	return &mAcceleration;
+}
+
+// Get the velocity of a Physics component.
+const Vector2D* Physics::GetVelocity() const
+{
+	return &mVelocity;
+}
+
+// Get the rotational velocity of a physics component.
+float Physics::GetRotationalVelocity() const
+{
+	return mRotationalVelocity;
+}
+
+// Get the old translation (position) of a Physics component.
+const Vector2D* Physics::GetOldTranslation() const
+{
+	return &mOldTranslation;
+}
+
+// Set the acceleration of a Physics component.
+void Physics::SetAcceleration(const Vector2D* acceleration)
+{
+	mAcceleration = *acceleration;
+}
+
+// Set the velocity of a Physics component.
+void Physics::SetVelocity(const Vector2D* velocity)
+{
+	mVelocity = *velocity;
+}
+
+// Set the rotational velocity of a physics component.
+void Physics::SetRotationalVelocity(float rotationalVelocity)
+{
+	mRotationalVelocity = rotationalVelocity;
+}
+
+// Set the "drag" value of a Physics component.
+void Physics::SetDrag( float drag)
+{
+	mDrag = drag;
 }
 
 //------------------------------------------------------------------------------
