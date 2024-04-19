@@ -184,7 +184,6 @@
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\ColliderCircle.cpp" />
     <ClCompile Include="Source\ColliderLine.cpp" />
-    <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\EntityContainer.cpp" />
@@ -232,7 +231,6 @@
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\ColliderCircle.h" />
     <ClInclude Include="Source\ColliderLine.h" />
-    <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityContainer.h" />
