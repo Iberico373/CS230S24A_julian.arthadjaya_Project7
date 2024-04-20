@@ -128,50 +128,20 @@
     <ClCompile Include="Source\Animation.cpp">
       <Filter>Engine\Entities\Components\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BehaviorBullet.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BehaviorSpaceship.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Behavior.cpp">
-      <Filter>Engine\Entities\Components\Behavior</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EntityContainer.cpp">
       <Filter>Engine\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AsteroidsScene.cpp">
-      <Filter>Game\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\MeshLibrary.cpp">
       <Filter>Engine\Entities\Components\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BehaviorAsteroid.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BehaviorHudText.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Teleporter.cpp">
       <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Collider.cpp">
-      <Filter>Engine\Entities\Components\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Source\Random.cpp">
       <Filter>Engine\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Source\SpriteSourceLibrary.cpp">
       <Filter>Engine\Entities\Components\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ColliderCircle.cpp">
-      <Filter>Engine\Entities\Components\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ColliderLine.cpp">
-      <Filter>Engine\Entities\Components\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\OmegaScene.cpp">
-      <Filter>Game\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\CheatSystem.cpp">
       <Filter>Game\Systems\Cheat</Filter>
@@ -181,6 +151,36 @@
     </ClCompile>
     <ClCompile Include="Source\Component.cpp">
       <Filter>Engine\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Behavior.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderLine.cpp">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collider.cpp">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderCircle.cpp">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorHudText.c">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorSpaceship.c">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorAsteroid.c">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BehaviorBullet.c">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsteroidsScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OmegaScene.cpp">
+      <Filter>Game\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,50 +256,20 @@
     <ClInclude Include="Source\Animation.h">
       <Filter>Engine\Entities\Components\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BehaviorBullet.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BehaviorSpaceship.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Behavior.h">
-      <Filter>Engine\Entities\Components\Behavior</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EntityContainer.h">
       <Filter>Engine\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AsteroidsScene.h">
-      <Filter>Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\MeshLibrary.h">
       <Filter>Engine\Entities\Components\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BehaviorAsteroid.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BehaviorHudText.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Teleporter.h">
       <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Collider.h">
-      <Filter>Engine\Entities\Components\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Source\Random.h">
       <Filter>Engine\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Source\SpriteSourceLibrary.h">
       <Filter>Engine\Entities\Components\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ColliderCircle.h">
-      <Filter>Engine\Entities\Components\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ColliderLine.h">
-      <Filter>Engine\Entities\Components\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\OmegaScene.h">
-      <Filter>Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\CheatSystem.h">
       <Filter>Game\Systems\Cheat</Filter>
@@ -309,6 +279,36 @@
     </ClInclude>
     <ClInclude Include="Source\Component.h">
       <Filter>Engine\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Behavior.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderCircle.h">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderLine.h">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collider.h">
+      <Filter>Engine\Entities\Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorBullet.h">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorHudText.h">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorSpaceship.h">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BehaviorAsteroid.h">
+      <Filter>Engine\Entities\Components\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsteroidsScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OmegaScene.h">
+      <Filter>Game\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,23 +1,18 @@
 ﻿  Animation.cpp
-  AsteroidsScene.cpp
-  Behavior.cpp
-  BehaviorAsteroid.cpp
-  BehaviorBullet.cpp
-  BehaviorHudText.cpp
-  BehaviorSpaceship.cpp
-  Collider.cpp
-  ColliderCircle.cpp
-  ColliderLine.cpp
+  Component.cpp
   Entity.cpp
   EntityContainer.cpp
   EntityFactory.cpp
+  Main.cpp
+  Physics.cpp
+  PlatformSystem.cpp
   Level1Scene.cpp
   Level2Scene.cpp
-  Mesh.cpp
-  MeshLibrary.cpp
-  OmegaScene.cpp
+  SceneSystem.cpp
   Sprite.cpp
-  Teleporter.cpp
+  Trace.cpp
+  Transform.cpp
+  Vector2D.cpp
   Generating Code...
   Project7.vcxproj -> C:\Users\julia\Documents\DigiPen\Spring 2024\CS-230\Project Files\CS230S24A_julian.arthadjaya_Project7\x64\Debug\Project7.exe
   1 File(s) copied

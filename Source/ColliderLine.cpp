@@ -144,7 +144,7 @@ bool ColliderLineIsCollidingWithCircle(const Collider* collider, const Collider*
 
 	// Get displacement of circle
 	Vector2D startPoint = *PhysicsGetOldTranslation(physics); // bS
-	Vector2D endPoint = *TransformGetTranslation(transform);  // bE
+	Vector2D endPoint = *transform->GetTranslation();  // bE
 
 	Vector2D displacement = { 0, 0 };  // v
 	Vector2DSub(&displacement, &endPoint, &startPoint);

@@ -15,7 +15,12 @@
 // Include Files:
 //------------------------------------------------------------------------------
 
-#include "Entity.h"
+#include "Vector2D.h"
+#include "Matrix2D.h"
+#include "DGL.h"
+#include "MeshLibrary.h"
+#include "SpriteSourceLibrary.h"
+#include "Trace.h"
 #include "Stream.h"
 
 //------------------------------------------------------------------------------
@@ -23,6 +28,8 @@
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
+
+typedef class Entity Entity;
 
 //------------------------------------------------------------------------------
 // Public Constants:
@@ -47,9 +54,10 @@ public:
 		cPhysics,
 		cSprite,
 		cTransform
-	};
+	}ComponentType;
 
 	Component(Component::ComponentType type);
+	virtual ~Component() { };
 
 	__inline Component::ComponentType Type() const { return mType; }
 
@@ -60,7 +68,7 @@ public:
 	virtual Component* Clone() const = 0;
 
 	// Component-specific read code.
-	virtual void Read(Stream stream) { };
+	virtual void Read(Stream stream) { UNREFERENCED_PARAMETER(stream); };
 
 	// Component-specific update code.
 	virtual void Update(float dt) { UNREFERENCED_PARAMETER(dt); }

@@ -23,11 +23,6 @@
 // Forward References:
 //------------------------------------------------------------------------------
 
-typedef struct DGL_Mat4 Matrix2D;
-typedef struct Transform Transform;
-typedef struct DGL_Vec2 Vector2D;
-typedef FILE* Stream;
-
 //------------------------------------------------------------------------------
 // Public Constants:
 //------------------------------------------------------------------------------
@@ -45,6 +40,8 @@ public:
 	Transform();
 	Transform(const Transform& other);
 
+	~Transform() { };
+
 	// Dynamically allocate a clone of an existing Transform.
 	Component* Clone() const override;
 
@@ -55,7 +52,7 @@ public:
 	const Matrix2D* GetMatrix();
 
 	// Get the translation of a Transform component.
-	const Vector2D* GetTranslation();
+	const Vector2D* GetTranslation() const;
 
 	// Get the rotation value of a Transform component.
 	float GetRotation() const;

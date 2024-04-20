@@ -16,15 +16,15 @@
 #include "Sprite.h"
 #include "Transform.h"
 #include "Stream.h"
-#include "Behavior.h"
-#include "BehaviorSpaceship.h"
-#include "BehaviorBullet.h"
-#include "BehaviorAsteroid.h"
-#include "BehaviorHudText.h"
-#include "Collider.h"
-#include "ColliderCircle.h"
-#include "ColliderLine.h"
 #include "Scene.h"
+//#include "Behavior.h"
+//#include "BehaviorSpaceship.h"
+//#include "BehaviorBullet.h"
+//#include "BehaviorAsteroid.h"
+//#include "BehaviorHudText.h"
+//#include "Collider.h"
+//#include "ColliderCircle.h"
+//#include "ColliderLine.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -50,15 +50,37 @@
 // Public Functions:
 //------------------------------------------------------------------------------
 
+Entity::Entity()
+	: mName("")
+	, mIsDestroyed(false)
+	, mComponents(std::vector<Component*>(6))
+{
+}
+
 // Dynamically allocate a clone of an existing Entity.
 Entity::Entity(const Entity& other)
+	: mIsDestroyed(false)
+	, mComponents(std::vector<Component*>(6))
 {
-	strcpy(mName, other.mName);
-	mIsDestroyed = false;
+	strcpy_s(mName, _countof(mName), other.mName);
 
 	for (auto component : other.mComponents)
 	{
-		Add(component->Clone());
+		if (component)
+			Add(component->Clone());
+	}
+}
+
+// Free the memory associated with an Entity.
+Entity::~Entity()
+{
+	for (auto component : mComponents)
+	{
+		if (component)
+		{
+			delete component;
+			component = nullptr;
+		}
 	}
 }
 
@@ -70,22 +92,13 @@ void Entity::Add(Component* component)
 		component->Parent(this);
 
 		// Add the component to the components list
-		mComponents.push_back(component);
+		mComponents[component->Type()] = component;
 	}
 }
 
 Component* Entity::Get(Component::ComponentType type)
 {
 	return mComponents[type];
-}
-
-// Free the memory associated with an Entity.
-void Entity::Free()
-{
-	for (auto component : mComponents)
-	{
-		delete component;
-	}
 }
 
 // Read (and construct) the components associated with a entity.
@@ -101,30 +114,30 @@ void Entity::Read(Stream stream)
 
 			if (strncmp(token, "Animation", _countof("Animation")) == 0)
 			{
-				Animation* animation = AnimationCreate();
-				AnimationRead(animation, stream);
-				EntityAddAnimation(entity, animation);
+				Animation* animation = new Animation();
+				animation->Read(stream);
+				Add(animation);
 			}
 
 			else if (strncmp(token, "Physics", _countof("Physics")) == 0)
 			{
-				Physics* physics = PhysicsCreate();
-				PhysicsRead(physics, stream);
-				EntityAddPhysics(entity, physics);
+				Physics* physics = new Physics();
+				physics->Read(stream);
+				Add(physics);
 			}
 
 			else if (strncmp(token, "Sprite", _countof("Sprite")) == 0)
 			{
-				Sprite* sprite = SpriteCreate();
-				SpriteRead(sprite, stream);
-				EntityAddSprite(entity, sprite);
+				Sprite* sprite = new Sprite();
+				sprite->Read(stream);
+				Add(sprite);
 			}
 
 			else if (strncmp(token, "Transform", _countof("Transform")) == 0)
 			{
-				Transform* transform = TransformCreate();
-				TransformRead(transform, stream);
-				EntityAddTransform(entity, transform);
+				Transform* transform = new Transform();
+				transform->Read(stream);
+				Add(transform);
 			}
 
 			else
@@ -192,7 +205,7 @@ bool Entity::IsDestroyed()
 // Set the Entity's name.
 void Entity::SetName(const char* name)
 {
-	strcpy(mName, name);
+	strcpy_s(mName, _countof(mName), name);
 }
 
 // Get the Entity's name.
@@ -212,7 +225,8 @@ void Entity::Update(float dt)
 {
 	for (auto component : mComponents)
 	{
-		component->Update(dt);
+		if (component)
+			component->Update(dt);
 	}
 }
 
@@ -221,7 +235,8 @@ void Entity::Render()
 {
 	for (auto component : mComponents)
 	{
-		component->Render();
+		if (component)
+			component->Render();
 	}
 }
 

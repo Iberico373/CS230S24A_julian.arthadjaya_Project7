@@ -51,11 +51,11 @@ void TeleporterUpdateEntity(Entity* entity)
 	Vector2DScale(&windowSize, &windowSize, 0.5f);
 
 	// Get entity velocity and translation
-	Physics* phys = EntityGetPhysics(entity);
-	Vector2D vel = *PhysicsGetVelocity(phys);
+	Physics* phys = entity->Has(Physics);
+	Vector2D vel = *(phys->GetVelocity());
 
-	Transform* trans = EntityGetTransform(entity);
-	Vector2D pos = *TransformGetTranslation(trans);
+	Transform* trans = entity->Has(Transform);
+	Vector2D pos = *(trans->GetTranslation());
 
 	// Check collision with edge of screen
 	if ((vel.x > 0) && (pos.x > windowSize.x))
@@ -70,7 +70,7 @@ void TeleporterUpdateEntity(Entity* entity)
 	if ((vel.y < 0) && (pos.y < -windowSize.y))
 		pos.y = windowSize.y;	// Teleport to top side
 
-	TransformSetTranslation(trans, &pos);
+	trans->SetTranslation(&pos);
 }
 
 //------------------------------------------------------------------------------

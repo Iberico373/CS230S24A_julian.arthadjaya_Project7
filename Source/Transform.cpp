@@ -11,9 +11,6 @@
 
 #include "stdafx.h"
 #include "Transform.h"
-#include "Vector2D.h"
-#include "Matrix2D.h"
-#include "Stream.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -50,7 +47,7 @@ Transform::Transform()
 	mMatrix = { 0.0f };
 }
 
-Transform::Transform(const Transform& other) : Component(other, Type())
+Transform::Transform(const Transform& other) : Component(other.Type())
 {
 	*this = other;
 }
@@ -107,7 +104,7 @@ float Transform::GetRotation() const
 // Get the scale of a Transform component.
 const Vector2D* Transform::GetScale() const
 {
-	return &mScale
+	return &mScale;
 }
 
 // Set the translation of a Transform component.

@@ -110,8 +110,8 @@ static void Level2SceneInit()
 
 static void Level2SceneMovementController(Entity* entity)
 {
-	Physics* physics = EntityGetPhysics(entity);
-	Transform* transform = EntityGetTransform(entity);
+	Physics* physics = entity->Has(Physics);
+	Transform* transform = entity->Has(Transform);
 
 	if (physics && transform)
 	{
@@ -119,12 +119,12 @@ static void Level2SceneMovementController(Entity* entity)
 		Vector2D worldMousePos = DGL_Camera_ScreenCoordToWorld(&mousePos);
 
 		Vector2D direction = { 0.0f, 0.0f };
-		Vector2DSub(&direction, &worldMousePos, TransformGetTranslation(transform));
+		Vector2DSub(&direction, &worldMousePos, transform->GetTranslation());
 		Vector2DNormalize(&direction, &direction);
 
-		TransformSetRotation(transform, Vector2DToAngleRad(&direction));	
+		transform->SetRotation(Vector2DToAngleRad(&direction));	
 		Vector2DScale(&direction, &direction, spaceshipSpeed);
-		PhysicsSetVelocity(physics, &direction);
+		physics->SetVelocity(&direction);
 	}
 }
 
@@ -137,7 +137,7 @@ static void Level2SceneUpdate(float dt)
 	UNREFERENCED_PARAMETER(dt);
 
 	Level2SceneMovementController(instance.entity);
-	EntityUpdate(instance.entity, dt);
+	instance.entity->Update(dt);
 
 	if (DGL_Input_KeyTriggered(VK_ESCAPE))
 	{
@@ -146,25 +146,25 @@ static void Level2SceneUpdate(float dt)
 
 	if (DGL_Input_KeyTriggered('Z'))
 	{
-		SpriteSetAlpha(EntityGetSprite(instance.entity), 0.5f);
+		instance.entity->Has(Sprite)->SetAlpha(0.5f);
 	}
 
 	if (DGL_Input_KeyTriggered('X'))
 	{
-		SpriteSetAlpha(EntityGetSprite(instance.entity), 1.0f);
+		instance.entity->Has(Sprite)->SetAlpha(1.0f);
 	}
 }
 
 // Render the scene.
 void Level2SceneRender(void)
 {
-	EntityRender(instance.entity);
+	instance.entity->Render();
 }
 
 // Exit the scene.
 static void Level2SceneExit()
 {
-	EntityFree(&instance.entity);
+	delete instance.entity;
 }
 
 // Unload any resources used by the scene.

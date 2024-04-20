@@ -102,7 +102,7 @@ BaseSystem* PlatformSystemGetInstance(HINSTANCE hInstance, int show)
 	DGL_SysInitInfo initInfo;
 	initInfo.mAppInstance = instance.mAppInstance;
 	initInfo.mShow = instance.mCreateWindow;
-	initInfo.mWindowTitle = "CS230 Project 6 - Omega";
+	initInfo.mWindowTitle = "CS230 Project 7 - Components";
 	initInfo.mWindowWidth = 1024;
 	initInfo.mWindowHeight = 768;
 	initInfo.mMaxFrameRate = 60;

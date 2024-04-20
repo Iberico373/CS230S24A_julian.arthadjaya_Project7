@@ -183,7 +183,7 @@ Entity* EntityContainerFindByName(const EntityContainer* entities, const char* e
 	{
 		Entity* entity = NodeGetEntity(node);
 
-		if (strcmp(EntityGetName(entity), entityName) == 0)
+		if (strcmp(entity->GetName(), entityName) == 0)
 			return entity;
 
 		node = NodeGetNext(node);
@@ -226,9 +226,9 @@ void EntityContainerUpdateAll(EntityContainer* entities, float dt)
 		Entity* entity = NodeGetEntity(node);
 		node = NodeGetNext(node);
 
-		EntityUpdate(entity, dt);
+		entity->Update(dt);
 
-		if (EntityIsDestroyed(entity))
+		if (entity->IsDestroyed())
 		{
 			EntityListDeleteNode(entities->entities, entity);
 			--entities->entityCount;
@@ -252,26 +252,27 @@ void EntityContainerCheckCollisions(EntityContainer* entities)
 
 	while (node)
 	{
-		Entity* entity = NodeGetEntity(node);
-		Collider* collider = EntityGetCollider(entity);
-		
-		if (collider)
-		{
-			Node* otherNode = NodeGetNext(node);
+		// Entity* entity = NodeGetEntity(node);
+		//	Collider* collider = entity->Has(Collider);
+		//	
+		//	if (collider)
+		//	{
+		//		Node* otherNode = NodeGetNext(node);
+		//	
+		//		while (otherNode)
+		//		{
+		//			Entity* other = NodeGetEntity(otherNode);
+		//			Collider* otherCollider = other->Has(Collider);
+		//	
+		//			if (otherCollider)
+		//				ColliderCheck(collider, otherCollider);
+		//	
+		//			otherNode = NodeGetNext(otherNode);
+		//		}
+		//	}
 
-			while (otherNode)
-			{
-				Entity* other = NodeGetEntity(otherNode);
-				Collider* otherCollider = EntityGetCollider(other);
-
-				if (otherCollider)
-					ColliderCheck(collider, otherCollider);
-
-				otherNode = NodeGetNext(otherNode);
-			}
-		}
-
-		node = NodeGetNext(node);
+		// node = NodeGetNext(node);
+		break;
 	}
 }
 
@@ -286,7 +287,7 @@ void EntityContainerRenderAll(const EntityContainer* entities)
 	while (node)
 	{
 		Entity* entity = NodeGetEntity(node);
-		EntityRender(entity);
+		entity->Render();
 
 		node = NodeGetNext(node);
 	}
@@ -468,7 +469,7 @@ static Node* ConstructNode(Entity* data, Node* next)
 
 static void DestructNode(Node** p_node)
 {
-	EntityFree(&((*p_node)->entity));
+	delete (*p_node)->entity;
 	free(*p_node);
 	*p_node = NULL;
 }

@@ -10,9 +10,9 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
+#include "Entity.h"
+#include "Transform.h"
 #include "Physics.h"
-#include "Vector2D.h"
-#include "Stream.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -69,17 +69,17 @@ void Physics::Update(float dt)
 	if (transform)
 	{
 		// Set translation
-		mOldTranslation = *TransformGetTranslation(transform);
+		mOldTranslation = *(transform->GetTranslation());
 		Vector2D newTranslation = { 0, 0 };
 
 		Vector2DScaleAdd(&(mVelocity), &(mAcceleration), &(mVelocity), dt);
 		Vector2DScale(&(mVelocity), &(mVelocity), mDrag);
 		Vector2DScaleAdd(&newTranslation, &(mVelocity), &mOldTranslation, dt);
-		TransformSetTranslation(transform, &newTranslation);
+		transform->SetTranslation(&newTranslation);
 
 		// Set rotation
-		float rotation = TransformGetRotation(transform) + (mRotationalVelocity * dt);
-		TransformSetRotation(transform, rotation);
+		float rotation = transform->GetRotation() + (mRotationalVelocity * dt);
+		transform->SetRotation(rotation);
 	}
 }
 

@@ -23,9 +23,9 @@
 // Forward References:
 //------------------------------------------------------------------------------
 
-typedef struct Entity Entity;
-typedef struct Animation Animation;
-typedef struct Sprite Sprite;
+typedef class Entity Entity;
+typedef class Animation Animation;
+typedef class Sprite Sprite;
 typedef FILE* Stream;
 
 //------------------------------------------------------------------------------
@@ -44,6 +44,8 @@ public:
 	// Dynamically allocate a new Animation component.
 	Animation();
 	Animation(const Animation& other);
+
+	~Animation() { };
 
 	// Dynamically allocate a clone of an existing Animation component.
 	Component* Clone() const override;

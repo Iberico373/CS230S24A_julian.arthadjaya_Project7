@@ -22,7 +22,7 @@
 //------------------------------------------------------------------------------
 
 typedef struct Collider Collider;
-typedef struct Entity Entity;
+typedef class Entity Entity;
 typedef FILE* Stream;
 
 //------------------------------------------------------------------------------

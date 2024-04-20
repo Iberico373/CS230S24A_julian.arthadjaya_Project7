@@ -15,7 +15,6 @@
 #include "SceneSystem.h"
 #include "Level1Scene.h"
 #include "Level2Scene.h"
-#include "Stream.h"
 #include "Mesh.h"
 #include "Sprite.h"
 #include "SpriteSource.h"
@@ -24,7 +23,6 @@
 #include "Physics.h"
 #include "Transform.h"
 #include "Animation.h"
-#include "Vector2D.h"
 
 //------------------------------------------------------------------------------
 // Private Structures:
@@ -107,7 +105,7 @@ static void Level1SceneUnload(void);
 static void Level1SceneRender(void);
 static void Level1SceneMovementController(Entity* entity);
 static void Level1SceneBounceController(Entity* entity);
-static bool Level1SceneIsColliding(const Entity* entityA, const Entity* entityB);
+static bool Level1SceneIsColliding(Entity* entityA, Entity* entityB);
 static void Level1SceneSetMonkeyState(Entity* entity, MonkeyStates newState);
 
 //------------------------------------------------------------------------------
@@ -176,9 +174,10 @@ static void Level1SceneInit()
 
 	if (instance.planetEntity)
 	{
-		SpriteSetMesh(EntityGetSprite(instance.planetEntity), instance.mesh1x1);
-		SpriteSetSpriteSource(EntityGetSprite(instance.planetEntity), instance.planetSpriteSource);
-		SpriteSetFrame(EntityGetSprite(instance.planetEntity), 0);
+		Sprite* planetSprite = instance.planetEntity->Has(Sprite);
+		planetSprite->SetMesh(instance.mesh1x1);
+		planetSprite->SetSpriteSource(instance.planetSpriteSource);
+		planetSprite->SetFrame(0);
 	}
 
 	instance.monkeyEntity = EntityFactoryBuild("Monkey");
@@ -193,12 +192,12 @@ static void Level1SceneInit()
 
 	if (instance.livesTextEntity)
 	{
-		Sprite* livesTextSprite = EntityGetSprite(instance.livesTextEntity);
+		Sprite* livesTextSprite = instance.livesTextEntity->Has(Sprite);
 
-		SpriteSetMesh(livesTextSprite, instance.mesh16x8);
-		SpriteSetSpriteSource(livesTextSprite, instance.livesTextSpriteSource);
+		livesTextSprite->SetMesh(instance.mesh16x8);
+		livesTextSprite->SetSpriteSource(instance.livesTextSpriteSource);
 		sprintf_s(instance.livesBuffer, _countof(instance.livesBuffer), "Lives: %d", instance.numLives);
-		SpriteSetText(livesTextSprite, instance.livesBuffer);
+		livesTextSprite->SetText(instance.livesBuffer);
 	}
 
 	DGL_Color bgColor = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -217,9 +216,10 @@ static void Level1SceneUpdate(float dt)
 	Level1SceneMovementController(instance.monkeyEntity);
 	Level1SceneBounceController(instance.planetEntity);
 
-	EntityUpdate(instance.monkeyEntity, dt);
-	EntityUpdate(instance.planetEntity, dt);
-	EntityUpdate(instance.livesTextEntity, dt);
+
+	instance.monkeyEntity->Update(dt);
+	instance.planetEntity->Update(dt);
+	instance.livesTextEntity->Update(dt);
 
 	if (Level1SceneIsColliding(instance.monkeyEntity, instance.planetEntity))
 	{
@@ -238,42 +238,44 @@ static void Level1SceneUpdate(float dt)
 // Render the scene.
 void Level1SceneRender(void)
 {
-	EntityRender(instance.planetEntity);
-	EntityRender(instance.monkeyEntity);
-	EntityRender(instance.livesTextEntity);
+	instance.planetEntity->Render();
+	instance.monkeyEntity->Render();
+	instance.livesTextEntity->Render();
 }
 
 // Exit the scene.
 static void Level1SceneExit()
 {
-	EntityFree(&instance.planetEntity);
-	EntityFree(&instance.monkeyEntity);
-	EntityFree(&instance.livesTextEntity);
+	delete instance.planetEntity;
+
+	delete instance.monkeyEntity;
+
+	delete instance.livesTextEntity;
 }
 
 // Unload any resources used by the scene.
 static void Level1SceneUnload(void)
 {
-	SpriteSourceFree(&instance.planetSpriteSource);
-	SpriteSourceFree(&instance.monkeyIdleSpriteSource);
-	SpriteSourceFree(&instance.monkeyJumpSpriteSource);
-	SpriteSourceFree(&instance.monkeyWalkSpriteSource);
+	SpriteSourceFree(&instance.planetSpriteSource);	
+	SpriteSourceFree(&instance.monkeyIdleSpriteSource);	
+	SpriteSourceFree(&instance.monkeyJumpSpriteSource);	
+	SpriteSourceFree(&instance.monkeyWalkSpriteSource);	
 	SpriteSourceFree(&instance.livesTextSpriteSource);
-
-	MeshFree(&instance.mesh1x1);
-	MeshFree(&instance.mesh3x3);
+	
+	MeshFree(&instance.mesh1x1);	
+	MeshFree(&instance.mesh3x3);	
 	MeshFree(&instance.mesh16x8);
 }
 
 static void Level1SceneMovementController(Entity* entity)
 {
-	Physics* physics = EntityGetPhysics(entity);
-	Transform* transform = EntityGetTransform(entity);
+	Physics* physics = entity->Has(Physics);
+	Transform* transform = entity->Has(Transform);
 
 	if (physics && transform)
 	{
 		// Get current velocity
-		Vector2D currentVelocity = *PhysicsGetVelocity(physics);
+		Vector2D currentVelocity = *(physics->GetVelocity());
 
 		// Check for horizontal inputs 
 		if (DGL_Input_KeyDown(VK_LEFT))
@@ -304,38 +306,38 @@ static void Level1SceneMovementController(Entity* entity)
 		{
 			Level1SceneSetMonkeyState(entity, MonkeyJump);
 			currentVelocity.y = jumpVelocity;
-			PhysicsSetAcceleration(physics, &gravityNormal);			
+			physics->SetAcceleration(&gravityNormal);
 		}
 
 		// Store current translation
-		Vector2D currentTranslation = *TransformGetTranslation(transform);
+		Vector2D currentTranslation = *transform->GetTranslation();
 
 		// Check if planet is grounded
 		if (currentTranslation.y < groundHeight)
 		{
 			Vector2D ground = { currentTranslation.x, groundHeight };
-			TransformSetTranslation(transform, &ground);
+			transform->SetTranslation(&ground);
 
 			currentVelocity.y = 0;
-			PhysicsSetAcceleration(physics, &gravityNone);
+			physics->SetAcceleration(&gravityNone);
 
 			Level1SceneSetMonkeyState(entity, MonkeyIdle);
 		}
 
 		// Set new velocity
-		PhysicsSetVelocity(physics, &currentVelocity);
+		physics->SetVelocity(&currentVelocity);
 	}
 }
 
 static void Level1SceneBounceController(Entity* entity)
 {
-	Physics* physics = EntityGetPhysics(entity);
-	Transform* transform = EntityGetTransform(entity);
+	Physics* physics = entity->Has(Physics);
+	Transform* transform = entity->Has(Transform);
 
 	if (physics && transform)
 	{
-		Vector2D currentPos = *TransformGetTranslation(transform);
-		Vector2D currentVelocity = *PhysicsGetVelocity(physics);
+		Vector2D currentPos = *(transform->GetTranslation());
+		Vector2D currentVelocity = *(physics->GetVelocity());
 
 		if (currentPos.x <= -wallDistance)
 		{
@@ -355,15 +357,16 @@ static void Level1SceneBounceController(Entity* entity)
 			currentVelocity.y = -currentVelocity.y;
 		}
 
-		TransformSetTranslation(transform, &currentPos);
-		PhysicsSetVelocity(physics, &currentVelocity);
+		transform->SetTranslation(&currentPos);
+		physics->SetVelocity(&currentVelocity);
 	}
 }
 
-static bool Level1SceneIsColliding(const Entity* entityA, const Entity* entityB)
+static bool Level1SceneIsColliding(Entity* entityA, Entity* entityB)
 {
-	Vector2D posA = *TransformGetTranslation(EntityGetTransform(entityA));
-	Vector2D posB = *TransformGetTranslation(EntityGetTransform(entityB));
+	Vector2D posA = *(entityA->Has(Transform)->GetTranslation());
+	Vector2D posB = *(entityB->Has(Transform)->GetTranslation());
+
 	float distance = Vector2DSquareDistance(&posA, &posB);
 
 	if (distance < CheckSquareDistance)
@@ -379,27 +382,27 @@ static void Level1SceneSetMonkeyState(Entity* entity, MonkeyStates newState)
 	{
 		instance.monkeyState = newState;
 
-		Sprite* sprite = EntityGetSprite(entity);
-		Animation* animation = EntityGetAnimation(entity);
+		Sprite* sprite = entity->Has(Sprite);
+		Animation* animation = entity->Has(Animation);
 
 		switch (newState)
 		{						
 		case MonkeyIdle:
-			SpriteSetMesh(sprite, instance.mesh1x1);
-			SpriteSetSpriteSource(sprite, instance.monkeyIdleSpriteSource);
-			AnimationPlay(animation, 1, 0.0f, false);
+			sprite->SetMesh(instance.mesh1x1);
+			sprite->SetSpriteSource(instance.monkeyIdleSpriteSource);
+			animation->Play(1, 0.0f, false);
 			break;
 
 		case MonkeyWalk:
-			SpriteSetMesh(sprite, instance.mesh3x3);
-			SpriteSetSpriteSource(sprite, instance.monkeyWalkSpriteSource);
-			AnimationPlay(animation, 8, 0.05f, true);
+			sprite->SetMesh(instance.mesh3x3);
+			sprite->SetSpriteSource(instance.monkeyWalkSpriteSource);
+			animation->Play(8, 0.05f, true);
 			break;
 
 		case MonkeyJump:
-			SpriteSetMesh(sprite, instance.mesh1x1);
-			SpriteSetSpriteSource(sprite, instance.monkeyJumpSpriteSource);
-			AnimationPlay(animation, 1, 0.0f, false);
+			sprite->SetMesh(instance.mesh1x1);
+			sprite->SetSpriteSource(instance.monkeyJumpSpriteSource);
+			animation->Play(1, 0.0f, false);
 			break;
 
 		default:

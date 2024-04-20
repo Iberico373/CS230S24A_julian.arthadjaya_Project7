@@ -11,15 +11,10 @@
 
 #include "stdafx.h"
 #include "Sprite.h"
-#include "Stream.h"
-#include "Trace.h"
 #include "SpriteSource.h"
 #include "Transform.h"
 #include "Mesh.h"
-#include "Matrix2D.h"
-#include "DGL.h"
-#include "MeshLibrary.h"
-#include "SpriteSourceLibrary.h"
+#include "Entity.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -66,8 +61,7 @@ Sprite::Sprite(const Sprite& other) : Component(other.Type())
 // Free the memory associated with a Sprite component.
 Sprite::~Sprite()
 {
-	delete mSpriteSource;
-	delete mMesh;
+
 }
 
 Component* Sprite::Clone() const
@@ -102,9 +96,11 @@ void Sprite::Render()
 	DGL_Color tint = { 0.0f, 0.0f, 0.0f, 0.0f };
 	DGL_Graphics_SetCB_TintColor(&tint);
 
-	if (!(mText))
+	Transform* transform = Parent()->Has(Transform);
+
+	if (!(*mText))
 	{
-		DGL_Graphics_SetCB_TransformMatrix(TransformGetMatrix(transform));
+		DGL_Graphics_SetCB_TransformMatrix(transform->GetMatrix());
 
 		// Render the mesh (list of triangles)
 		MeshRender(mMesh);
@@ -112,10 +108,10 @@ void Sprite::Render()
 
 	else
 	{
-		Matrix2D matrix = *(TransformGetMatrix(transform));
+		Matrix2D matrix = *(transform->GetMatrix());
 
 		Matrix2D offset = { 0 };
-		Matrix2DTranslate(&offset, TransformGetScale(transform)->x, 0.0f);
+		Matrix2DTranslate(&offset, transform->GetScale()->x, 0.0f);
 
 		const char* text = mText;
 

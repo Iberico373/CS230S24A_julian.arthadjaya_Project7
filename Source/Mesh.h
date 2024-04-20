@@ -88,7 +88,7 @@ void MeshBuildQuad(Mesh* mesh, float xHalfSize, float yHalfSize, float uSize, fl
 // (NOTE: The drawMode should be set to DGL_DM_TRIANGLELIST.)
 // Params:
 //   mesh = Pointer to an existing, empty Mesh object.
-void MeshBuildSpaceship(Mesh* mesh);
+// void MeshBuildSpaceship(Mesh* mesh);
 
 // Read the properties of a Mesh object from a file.
 // (NOTE: First, read a token from the file and verify that it is "Mesh".)

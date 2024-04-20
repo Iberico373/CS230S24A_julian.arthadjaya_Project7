@@ -10,9 +10,9 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
+#include "Entity.h"
 #include "Animation.h"
 #include "Sprite.h"
-#include "Stream.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:

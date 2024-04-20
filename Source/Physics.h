@@ -23,10 +23,7 @@
 // Forward References:
 //------------------------------------------------------------------------------
 
-typedef struct Physics Physics;
-typedef struct Transform Transform;
-typedef struct DGL_Vec2 Vector2D;
-typedef FILE* Stream;
+typedef class Transform Transform;
 
 //------------------------------------------------------------------------------
 // Public Constants:
@@ -42,6 +39,8 @@ public:
 	// Dynamically allocate a new Physics component.
 	Physics();
 	Physics(const Physics& other);
+
+	~Physics() { };
 
 	// Dynamically allocate a clone of an existing Physics component.
 	Component* Clone() const override;

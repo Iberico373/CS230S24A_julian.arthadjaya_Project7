@@ -25,9 +25,7 @@
 
 typedef struct Mesh Mesh;
 typedef struct SpriteSource SpriteSource;
-typedef struct Sprite Sprite;
-typedef struct Transform Transform;
-typedef FILE* Stream;
+typedef class Transform Transform;
 
 //------------------------------------------------------------------------------
 // Public Constants:

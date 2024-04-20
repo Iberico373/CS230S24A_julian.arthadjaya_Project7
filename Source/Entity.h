@@ -26,13 +26,6 @@
 // Forward References:
 //------------------------------------------------------------------------------
 
-typedef struct Animation Animation;
-typedef struct Behavior Behavior;
-typedef struct Collider Collider;
-typedef struct Entity Entity;
-typedef struct Physics Physics;
-typedef struct Sprite Sprite;
-typedef struct Transform Transform;
 typedef FILE* Stream;
 
 //------------------------------------------------------------------------------
@@ -46,7 +39,13 @@ typedef FILE* Stream;
 class Entity
 {
 public:
+	Entity();
+
+	// Dynamically allocate a clone of an existing Entity.
 	Entity(const Entity& other);
+
+	// Free the memory associated with an Entity.
+	~Entity();
 
 	void Add(Component* component);
 	Component* Get(Component::ComponentType type);
@@ -56,9 +55,6 @@ public:
 	{
 		return static_cast<type*>(Get(typeId));
 	}
-
-	// Free the memory associated with an Entity.
-	void Free();
 
 	// Read (and construct) the components associated with a entity.
 	void Read(Stream stream);

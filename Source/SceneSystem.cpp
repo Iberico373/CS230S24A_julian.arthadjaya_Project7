@@ -15,8 +15,7 @@
 
 #include "BaseSystem.h"
 #include "Level1Scene.h"
-#include "AsteroidsScene.h"
-#include "OmegaScene.h"
+#include "Level2Scene.h"
 #include "Scene.h"
 #include "SceneSystem.h"
 #include "StubScene.h"

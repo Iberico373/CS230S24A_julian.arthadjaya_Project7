@@ -59,7 +59,7 @@ Entity* EntityFactoryBuild(const char* entityName)
 	Entity* archetype = EntityContainerFindByName(archetypes, entityName);
 
 	if (archetype)
-		return EntityClone(archetype);
+		return new Entity(*archetype);
 
 	char pathName[FILENAME_MAX] = "";
 	sprintf_s(pathName, _countof(pathName), "./Data/%s.txt", entityName);
@@ -72,13 +72,13 @@ Entity* EntityFactoryBuild(const char* entityName)
 
 		if (strncmp(token, "Entity", _countof("Entity")) == 0)
 		{
-			Entity* entity = EntityCreate();
-			EntityRead(entity, stream);
+			Entity* entity = new Entity();
+			entity->Read(stream);
 
 			if (EntityContainerAddEntity(archetypes, entity))
 			{
 				StreamClose(&stream);
-				return EntityClone(entity);
+				return new Entity(*entity);
 			}
 		}
 
